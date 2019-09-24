@@ -1,0 +1,86 @@
+"""TITLE OF FILE."""
+
+import os
+
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""{'Author': 'Florian Zah',
+ 'Contact': '',
+ 'Copyright': 'Florian Zah',
+ 'Credits': [],
+ 'Date': 'dd.mm.yyyy',
+ 'Description': '.',
+ 'Last Modification': 'dd.mm.yyyy',
+ 'Licence': '',
+ 'Maintainer': 'Florian Zah',
+ 'Status': 'Prototype/Production/Deprecated',
+ 'Tags': [],
+ 'Title': 'CAPITAL LETTER',
+ 'Usage': '.'
+ 'Version': 'major.minor.patch'}
+"""
+"""{'Author': 'Florian Zah', 'Date': '07.08.2019',
+'Description': 'Underscore in Python','Last Modification': None,
+'Tags': ['underscore', 'dunder', 'magic methods'],
+'Title': 'Underscore in Python'}}"""
+
+UNDERSCORES IN PYTHON
+
+1. Single underscore: _
+    1.1 Last value in REPL; insignificant or temporary variable
+    1.2 * for _ in range(32):
+              print('Hello, World.')  # _ = 0,1,2,...,31
+        * color, _, _, mileage = ('red', 'auto', 12, 3812.4)
+        * REPL >>> _  # show last value
+
+2. Single leading underscore: _variable
+    2.1 * Private variable in class, functions (just convention)
+        * If in a module will not be imported (unless explicit import)
+    2.2 * self._money = 10
+        * from module import *  # will not import _var/methods...
+        
+3. Single trailing underscore: variable_
+    3.1 Avoid naming conflict in Python (with keywords)
+    3.2 * dir_  # dir is a keyword in Pyhton
+        * first_variable_1  # creating var names
+
+4. Double leading underscore: __variable
+    4.1 Rewrite the atribute name of subclasses to avoid conflict
+    4.2 * class ExtendedTest(Test):
+            def __init__(self):
+                super().__init__()
+                self.foo = 'overridden'
+                self._bar = 'overridden'
+                self.__baz = 'overridden'
+            >>> dir(t2)  # __baz renamed _ExtendedTest__baz
+            ['_ExtendedTest__baz', '_Test__baz', '__class__', ...]
+
+5. Double leading and trailing underscore: __variable__
+    5.1 Dunder or special / "magic methods" like: __init__, __call__
+    5.2 * def __init__(self):
+
+
+
+┌───────────────────────────┬─────────────┬────────────────────────────────┐
+│        Pattern            │ Example     │          Meaning               │
+╞═══════════════════════════╪═════════════╪════════════════════════════════╡
+│ Single underscore         │    _        │ * Temporary or insignificalt   │
+│                           │             │ variableSometimes used as      │
+│                           │             │ a name for temporary or        │
+│                           │             │ insignificant variable;        │
+│                           │             │ * last value in Python REPL.   │
+├───────────────────────────┼─────────────┼────────────────────────────────┤
+│ Leading underscore        │   _var      │ *Private; internal use         │
+│                           │             │ (just convention)              │
+├───────────────────────────┼─────────────┼────────────────────────────────┤
+│ Trailing underscore       │    var_     │ *Avoid name conflict in python │
+│                           │             │  (class_)                      │
+├───────────────────────────┼─────────────┼────────────────────────────────┤
+│ Double leading underscore │  __var      │ *Rename the __var to avoid     │
+│                           │             │  subclasses conflict(__var ->  │
+│                           │             │  _Class__var)                  │
+├───────────────────────────┼─────────────┼────────────────────────────────┤
+│ Double leading and        │  __var__    │ *Special methods               │
+│ trailing underscore       │             │ (__init__, __call__)           │
+└───────────────────────────┴─────────────┴────────────────────────────────┘
+??─┘
