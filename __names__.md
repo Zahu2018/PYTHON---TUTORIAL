@@ -84,3 +84,25 @@ The code in program1.py will have the expected result. We import function withou
         if __name__ == '__main__':
             main()
 
+┌───────────────────────────┬─────────────┬────────────────────────────────┐
+│        Pattern            │ Example     │          Meaning               │
+╞═══════════════════════════╪═════════════╪════════════════════════════════╡
+│ Single underscore         │    _        │ * Temporary or insignificalt   │
+│                           │             │ variableSometimes used as      │
+│                           │             │ a name for temporary or        │
+│                           │             │ insignificant variable;        │
+│                           │             │ * last value in Python REPL.   │
+├───────────────────────────┼─────────────┼────────────────────────────────┤
+│ Leading underscore        │   _var      │ *Private; internal use         │
+│                           │             │ (just convention)              │
+├───────────────────────────┼─────────────┼────────────────────────────────┤
+│ Trailing underscore       │    var_     │ *Avoid name conflict in python │
+│                           │             │  (class_)                      │
+├───────────────────────────┼─────────────┼────────────────────────────────┤
+│ Double leading underscore │  __var      │ *Rename the __var to avoid     │
+│                           │             │  subclasses conflict(__var ->  │
+│                           │             │  _Class__var)                  │
+├───────────────────────────┼─────────────┼────────────────────────────────┤
+│ Double leading and        │  __var__    │ *Special methods               │
+│ trailing underscore       │             │ (__init__, __call__)           │
+└───────────────────────────┴─────────────┴────────────────────────────────┘
