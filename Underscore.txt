@@ -1,24 +1,4 @@
-"""TITLE OF FILE."""
-
-import os
-
-# !/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""{'Author': 'Florian Zah',
- 'Contact': '',
- 'Copyright': 'Florian Zah',
- 'Credits': [],
- 'Date': 'dd.mm.yyyy',
- 'Description': '.',
- 'Last Modification': 'dd.mm.yyyy',
- 'Licence': '',
- 'Maintainer': 'Florian Zah',
- 'Status': 'Prototype/Production/Deprecated',
- 'Tags': [],
- 'Title': 'CAPITAL LETTER',
- 'Usage': '.'
- 'Version': 'major.minor.patch'}
-"""
+"""UNDERSCORES IN PYTHON."""
 """{'Author': 'Florian Zah', 'Date': '07.08.2019',
 'Description': 'Underscore in Python','Last Modification': None,
 'Tags': ['underscore', 'dunder', 'magic methods'],
