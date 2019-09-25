@@ -1,3 +1,8 @@
+"""__NAMES__."""
+"""{'Author': 'Florian Zah', 'Date': '25.09.2019',
+'Description': '__ names in python __','Last Modification': None,
+'Tags': ['__names__', 'names', '__main__', 'main'],
+'Title': '__names in Python__'}}"""
 __names__
 =========
 if __name__ == '__main__': function()
