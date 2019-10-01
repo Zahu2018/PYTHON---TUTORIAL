@@ -1,0 +1,36 @@
+"""{'Author': 'Florian Zah', 'Date': '01.10.2019',
+'Description': 'Exit or close a python program','Last Modification': '',
+'Tags': ['exit', 'quit', 'sys.exit', 'os.exit', 'close', 'inchide'],
+'Title': 'EXIT'}}"""
+
+1. quit(code=None)
+    a) in consola: iese din python fara eroare
+    b) raise: SystemExit(code); SystemExit: None
+    -) should not be used in production
+    -) only in console
+    -) when: print(quit) => Use quit() or Ctrl-Z plus Return to exit
+    -) it relies on the site module that start automatically
+
+2. exit(code=None)
+    a) in consola: iese din python fara eroare
+    b) raise: SystemExit(code); SystemExit: None
+    -) only in console
+    -) when: print(quit) => Use quit() or Ctrl-Z plus Return to exit
+    -) it relies on the site module that start automatically
+
+3. sys.exit()
+    a) in consola: iese din python fara eroare
+    b) raise: SystemExit
+    -) good for production (the best)
+    -) or: raise SystemExit
+    -) sys.exit(0) = exit without any errors / probles
+    -) sys.exit(1) = there was issues/errors/problems
+
+4. os._exit(0)
+    a) in consola: iese din python fara eroare
+    b) iese fara eroare. ("Repl Closed")
+    -) for child processes (after: os.fork
+    -) exit without cleanup handlers, flushes stdio buffers, ...
+
+Alternative:
+    raise SystemExit (fara: import sys)
