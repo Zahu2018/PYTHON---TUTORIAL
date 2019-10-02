@@ -1,0 +1,8 @@
+OPERATORS
+>> appends to a file or creates the file if it doesn't exist.
+>  overwrites the file if it exists or creates it if it doesn't exist.
+:: Comment
+
+cls
+pause
+exit

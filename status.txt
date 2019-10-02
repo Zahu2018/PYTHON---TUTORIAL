@@ -1,0 +1,27 @@
+"""{'Author': 'Florian Zah', 'Date': '02.10.2019',
+'Description': 'Status of program development','Last Modification': '',
+'Tags': ['status', 'program', 'software', 'development'],
+'Title': 'STATUS'}}"""
+
+Status          Definition
+======          ==========
+Proposed        The requirement has been requested by an authorized
+                source.
+In Progress     A business analyst is actively working on crafting
+                the requirement.
+Drafted         The initial version of the requirement has been
+                written.
+Approved        The requirement has been analyzed, its impact on the
+                project has been estimated, and it has been allocated to the baseline for a specific release. The key stakeholders have agreed to incorporate the requirement, and the software development group has committed to implement it.
+Implemented     The code that implements the requirement has been
+                designed, written, and unit tested. The requirement has been traced to the pertinent design and code elements. It’s now ready for review or other verification.
+Verified        The requirement has satisfied its acceptance
+                criteria, meaning that the correct functioning of the implemented requirement has been confirmed. The requirement has been traced to pertinent tests. It is now considered complete.
+Deferred        An approved requirement is now planned for
+                implementation in a later release.
+Deleted         An approved requirement has been removed from the
+                baseline. Include an explanation of why and by whom the decision was made to delete it.
+Rejected        The requirement was proposed but was never approved
+                and is not planned for implementation in any upcoming release. Include an explanation of why and by whom the decision was made to reject it.
+
+Flush = transfer data from the buffer to the file/output, clearing the buffer.
