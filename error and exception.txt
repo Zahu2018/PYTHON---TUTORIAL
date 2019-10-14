@@ -76,16 +76,16 @@ ZeroDivisionError: try to divide with 0; division by zero
 Warning: a warning
 ------------------
 
-+-- BytesWarning
-+-- DeprecationWarning
-+-- FutureWarning
-+-- ImportWarning
-+-- PendingDeprecationWarning
-+-- ResourceWarning
-+-- RuntimeWarning
-+-- SyntaxWarning
-+-- UnicodeWarning
-+-- UserWarning
+BytesWarning
+DeprecationWarning
+FutureWarning
+ImportWarning
+PendingDeprecationWarning
+ResourceWarning
+RuntimeWarning
+SyntaxWarning
+UnicodeWarning
+UserWarning
 
 Exception Hierarchy
 -------------------
@@ -152,7 +152,7 @@ BaseException
         +-- BytesWarning
         +-- ResourceWarning
 
-Exception Hierarchy with explatnation
+Exception Hierarchy with explanation
 -------------------------------------
 
 BaseException: a basic exception from which all the others originate.
@@ -242,6 +242,7 @@ Debug:
 
 PYFLAKE = DEBUGGING PROGRAMM
 pyflakes myprogram.py # asa se executa din commander
+
 PDB = builtin module
 import pdb # exemplu de utilizare
 def our_function():
