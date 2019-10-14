@@ -1,0 +1,249 @@
+"""{'Author': 'Florian Zah', 'Date': '14.10.2019',
+'Description': 'Error and exception','Last Modification': None,
+'Tags': ['error', 'exception', 'try', 'except'],
+'Title': 'ERRORS AND EXCEPTION'}}"""
+
+ERRORS AND EXCEPTION
+====================
+
+Type of error
+-------------
+
+COMMISION - {Greseli Logice} - eroneous output, app. stop brusc, dialog boxes, freeze comp, data damage;
+OMMISION  - incorrect info input by user, internet conexion, hardware, incompatim
+SYNTACTIC - typo, case sensitive
+SEMANTIC  - one more loop, wrong implementation
+LOGIC     - gandire gresita, variabile neasteptate or nume de variabile gresite, input neasteptat, only hardisk instead of other devices, indentare la un nivel gresit, operator order is wrong, boolean mistakes
+
+errno: eroare sub forma de nr. intreg
+strerror: eroare sub forma de sir (human readable)
+
+Exception Alphabeticaly
+-----------------------
+
+ArithmeticError: arithmetic error; attribute not found in object
+AssertionError: the expression in the assert function is false; fail of declaration
+AttributeError: the object does not have this attribute (value or method)
+BaseException: a basic exception from which all the others originate
+BlockingIOError:
+BrokenPipeError:
+BufferError: The operation associated with the buffer cannot be performed
+ChildProcessError: failure during operation with a child process
+ConnectionAbortedError:
+ConnectionError: is the base class for connection exceptions
+ConnectionRefusedError:
+ConnectionResetError:
+EOFError: try to read before EOF; the function came across the end of the file and was unable to read what it wanted
+Exception: and here already completely system exceptions (which are better not to touch) already end and ordinary ones with which you can work begin.
+FileExistsError: An attempt to create a file or directory that already exists
+FileNotFoundError: file or directory does not exist
+FloatingPointError: when a floating point operation fails. Rarelly.
+GeneratorExit: when the close method of the generator obj. is called
+IOError: I/O operation fail (file not found, ...)
+ImportError: import of the module or its attribute failed
+IndentationError: Indentation is incorrect
+IndexError: try to access and index that not exist; the index is not in the range of elements
+InterruptedError: A system call is interrupted by an incoming signal
+IsADirectoryError: a file was expected, but this is a directory
+KeyboardInterrupt: when interrupts a prog. (usually with Ctrl + C).
+KeyError: a nonexistent key (in a dictionary , set, or other object); key in dict not found
+LookupError: invalid index or key
+MemoryError: Not enough memory
+NameError: a variable with the same name was not found; a name of idetifier (var, funct) not found
+NotADirectoryError: a directory was expected, but this is a file
+NotImplementedError: occurs when abstract class methods require overriding in child classes
+OSError: system related error
+OverflowError: value to big to be represented; when result of an arithmetic operation is too large to represent. Does not appear during normal work with integers (since python supports long numbers), but may occur in some other cases.
+PermissionError: not enough access rights
+ProcessLookupError: not enough access rights
+ReferenceError: An attempt to access an attribute with a weak reference
+RuntimeError: division with0, operation with var of different type, accessing what not exist, run out of memory; occurs when the exception does not fall into any of the other categories
+StopIteration: the built-in next func. if there are'n more elem. in iter.
+SyntaxError: syntax error
+SystemError: is an internal error
+SystemExit: thrown by the sys.exit func. when exit the program.
+TabError: blending indentation tabs and spaces
+TimeoutError: timeout expired
+TypeError: operation with var of different type (int+str); The operation is applied to an object of an inappropriate type
+UnboundLocalError: try to access a var before setting ; a reference has been made to a local variable in a function, but the variable has not been previously defined
+UnicodeEncodeError: An exception related to unicode encoding
+UnicodeDecodeError: An exception related to unicode decoding
+UnicodeError: error related to encoding / decoding of unicode in strings
+UnicodeTranslateError: is an exception related to unicode translation
+ValueError: variable are the same type but value differ; the function receives an argument of the correct type, but an incorrect value
+ZeroDivisionError: try to divide with 0; division by zero
+
+Warning: a warning
+------------------
+
++-- BytesWarning
++-- DeprecationWarning
++-- FutureWarning
++-- ImportWarning
++-- PendingDeprecationWarning
++-- ResourceWarning
++-- RuntimeWarning
++-- SyntaxWarning
++-- UnicodeWarning
++-- UserWarning
+
+Exception Hierarchy
+-------------------
+
+BaseException
++-- SystemExit
++-- KeyboardInterrupt
++-- GeneratorExit
++-- Exception
+    +-- StopIteration
+    +-- ArithmeticError
+    |   +-- FloatingPointError
+    |   +-- OverflowError
+    |   +-- ZeroDivisionError
+    +-- AssertionError
+    +-- AttributeError
+    +-- BufferError
+    +-- EOFError
+    +-- ImportError
+    +-- LookupError
+    |   +-- IndexError
+    |   +-- KeyError
+    +-- MemoryError
+    +-- NameError
+    |   +-- UnboundLocalError
+    +-- OSError
+    |   +-- BlockingIOError
+    |   +-- ChildProcessError
+    |   +-- ConnectionError
+    |   |   +-- BrokenPipeError
+    |   |   +-- ConnectionAbortedError
+    |   |   +-- ConnectionRefusedError
+    |   |   +-- ConnectionResetError
+    |   +-- FileExistsError
+    |   +-- FileNotFoundError
+    |   +-- InterruptedError
+    |   +-- IsADirectoryError
+    |   +-- NotADirectoryError
+    |   +-- PermissionError
+    |   +-- ProcessLookupError
+    |   +-- TimeoutError
+    +-- ReferenceError
+    +-- RuntimeError
+    |   +-- NotImplementedError
+    +-- SyntaxError
+    |   +-- IndentationError
+    |       +-- TabError
+    +-- SystemError
+    +-- TypeError
+    +-- ValueError
+    |   +-- UnicodeError
+    |        +-- UnicodeDecodeError
+    |        +-- UnicodeEncodeError
+    |        +-- UnicodeTranslateError
+    +-- Warning
+        +-- DeprecationWarning
+        +-- PendingDeprecationWarning
+        +-- RuntimeWarning
+        +-- SyntaxWarning
+        +-- UserWarning
+        +-- FutureWarning
+        +-- ImportWarning
+        +-- UnicodeWarning
+        +-- BytesWarning
+        +-- ResourceWarning
+
+Exception Hierarchy with explatnation
+-------------------------------------
+
+BaseException: a basic exception from which all the others originate.
++-- SystemExit: thrown by the sys.exit func. when exit the program.
++-- KeyboardInterrupt: when interrupts a prog. (usually with Ctrl + C).
++-- GeneratorExit: when the close method of the generator obj. is called
++-- Exception: and here already completely system exceptions (which are better not to touch) already end and ordinary ones with which you can work begin.
+    +-- StopIteration: the built-in next func. if there are'n more elem. in iter.
+    +-- ArithmeticError: arithmetic error
+    |   +-- FloatingPointError: when a floating point operation fails. Rarelly.
+    |   +-- OverflowError: when result of an arithmetic operation is too large to represent. Does not appear during normal work with integers (since python supports long numbers), but may occur in some other cases.
+    |   +-- ZeroDivisionError: division by zero
+    +-- AssertionError: the expression in the assert function is false
+    +-- AttributeError: the object does not have this attribute (value or method)
+    +-- BufferError: The operation associated with the buffer cannot be performed
+    +-- EOFError: the function came across the end of the file and was unable to read what it wanted
+    +-- ImportError: import of the module or its attribute failed
+    +-- LookupError: invalid index or key
+    |   +-- IndexError: the index is not in the range of elements
+    |   +-- KeyError: a nonexistent key (in a dictionary , set, or other object)
+    +-- MemoryError: Not enough memory
+    +-- NameError: a variable with the same name was not found
+    |   +-- UnboundLocalError: a reference has been made to a local variable in a function, but the variable has not been previously defined
+    +-- OSError: system related error
+    |   +-- BlockingIOError:
+    |   +-- ChildProcessError: failure during operation with a child process
+    |   +-- ConnectionError: is the base class for connection exceptions
+    |   |   +-- BrokenPipeError
+    |   |   +-- ConnectionAbortedError
+    |   |   +-- ConnectionRefusedError
+    |   |   +-- ConnectionResetError
+    |   +-- FileExistsError: An attempt to create a file or directory that already exists
+    |   +-- FileNotFoundError: file or directory does not exist
+    |   +-- InterruptedError: A system call is interrupted by an incoming signal
+    |   +-- IsADirectoryError: a file was expected, but this is a directory
+    |   +-- NotADirectoryError: a directory was expected, but this is a file
+    |   +-- PermissionError: not enough access rights
+    |   +-- ProcessLookupError: not enough access rights
+    |   +-- TimeoutError: timeout expired
+    +-- ReferenceError: An attempt to access an attribute with a weak reference
+    +-- RuntimeError: occurs when the exception does not fall into any of the other categories
+    |   +-- NotImplementedError: occurs when abstract class methods require overriding in child classes
+    +-- SyntaxError: syntax error
+    |   +-- IndentationError: Indentation is incorrect
+    |       +-- TabError: blending indentation tabs and spaces
+    +-- SystemError: is an internal error
+    +-- TypeError: The operation is applied to an object of an inappropriate type
+    +-- ValueError: the function receives an argument of the correct type, but an incorrect value
+    |   +-- UnicodeError: error related to encoding / decoding of unicode in strings
+    |       +-- UnicodeDecodeError: An exception related to unicode decoding
+    |       +-- UnicodeEncodeError: An exception related to unicode encoding
+    |       +-- UnicodeTranslateError: is an exception related to unicode translation
+    +-- Warning: a warning
+        +-- DeprecationWarning
+        +-- PendingDeprecationWarning
+        +-- RuntimeWarning
+        +-- SyntaxWarning
+        +-- UserWarning
+        +-- FutureWarning
+        +-- ImportWarning
+        +-- UnicodeWarning
+        +-- BytesWarning
+        +-- ResourceWarning
+
+Handling Error and Exception
+----------------------------
+
+try:
+    statement1
+    statement2
+except:
+    statement1
+    statement2
+
+try:
+    statement1
+except(SyntaxError):
+    print("Eroare de sintaxa")
+except(TypeError):
+    print("Type invalid ...")
+finally:
+    print("We finished block")
+
+
+Debug:
+------
+
+PYFLAKE = DEBUGGING PROGRAMM
+pyflakes myprogram.py # asa se executa din commander
+PDB = builtin module
+import pdb # exemplu de utilizare
+def our_function():
+    bad_idea = 3 + "4"
+pdb.run('our_function()')
