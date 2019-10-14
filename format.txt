@@ -1,0 +1,276 @@
+FORMAT
+
+'{}'.format(value)
+'{}{}'.format(value1, value2)
+'{0}{1}'.format(posit_arg, keyw_arg)  # {1:.2f}, {1:8}"
+'{}'.format(p0, p1, ..., k0=v0, k1=v1, ...)
+'{field_name:conversion}'.format(value)
+
+Conversion:
+s – strings
+d – decimal integers (base-10)
+f – floating point display
+F - same as f; display 'inf' as 'INF' and 'nan' as 'NAN'
+c – unicode character
+b – binary
+o – octal
+x – hexadecimal with lowercase letters after 9
+X – hexadecimal with uppercase letters after 9
+e – exponent notation
+E - exponent notation uppercase
+g - general; round number to p significant digit; default precision 6
+G - same as g; switches to E if the number is large
+n - same as d; it use current locale setting for number separator
+% - percentage; multiples by 100 and puts % ath the end
+
+
+Padding:
+<   :  left-align text in the field
+^   :  center text in the field
+>   :  right-align text in the field
+=   :  forces the signed (+) and(-) to the leftmost position
+
+Explanation:
+{2:*=8.3f} ::
+2    - number of placeholding or name
+:    -
+*    - sign for padding
+=<>^ - alignment sign
+8    - number of spaces reserved
+.3   - truncated (even for string)
+f    - floating
+
+
+Errors and exceptions:
+IndexError: when placeholders are to many
+
+Example:
+"temperature {0:.0f}".format(35.456)
+"{0:9.2f}".format(100.253) => 9 spaces allocated including "."; .2f = 2 decimales
+"{1:b}".format(100) => 1100100 (binar)
+"{3:o}".format(100) => 144 (octal)
+---------
+"{1:8}!".format('geeks') => geeks  !; 8 = spaces allocated for placeholder
+"{0:^16}".format("txt", 10)
+"{:*^20s}".format('txt') => ***txt***
+"{:08d}".format(12) => padd with 0 at the begin
+"{:+f}{: -f}".format(1.2, -2.2) => the second has space
+"{name}{blc:9.3f}".format(name="Alis", blc=125.652)
+-------------------------
+getattr()
+# define Person class
+class Person:
+    age = 23
+    name = "Adam"
+
+# format age; p = object
+print("{p.name}'s age is: {p.age}".format(p=Person()))
+---------------------------
+__getitem__()
+# define Person dictionary
+person = {'age': 23, 'name': 'Adam'}
+
+# format age; p = dictionar
+print("{p[name]}'s age is: {p[age]}".format(p=person))
+--------------------------
+str.format(**mapping)
+# define Person dictionary
+person = {'age': 23, 'name': 'Adam'}
+
+# format age; mapping
+print("{name}'s age is: {age}".format(**person))
+-------------------------
+Dynamic formating (precision, alignment, fill char, ..)
+# dynamic string format template
+string = "{:{fill}{align}{width}}"
+
+# passing format codes as arguments
+print(string.format('cat', fill='*', align='^', width=5))
+
+# dynamic float format template
+num = "{:{align}{width}.{precision}f}"
+
+# passing format codes as arguments
+print(num.format(123.236, align='<', width=8, precision=2))
+--------------------------------
+__format__()
+import datetime
+# datetime formatting
+date = datetime.datetime.now()
+print("It's now: {:%Y/%m/%d %H:%M:%S}".format(date))
+
+# complex number formatting
+complexNumber = 1+2j
+print("Real part: {0.real} and Imaginary part: {0.imag}".format(complexNumber))
+
+# custom __format__() method
+class Person:
+    def __format__(self, format):
+        if(format == 'age'):
+            return '23'
+        return 'None'
+
+print("Adam's age is: {:age}".format(Person()))
+-------------------------------------
+_str__() and __repr__()
+# __str__() and __repr__() shorthand !r and !s
+print("Quotes: {0!r}, Without Quotes: {0!s}".format("cat"))
+
+# __str__() and __repr__() implementation for class
+class Person:
+    def __str__(self):
+        return "STR"
+    def __repr__(self):
+        return "REPR"
+
+print("repr: {p!r}, str: {p!s}".format(p=Person()))
+---------------------------------------
+---------------------------------------
+OLD AND NEW FORMATING - COMPARISON
+
+BASIC
+Old - %s %s' % ('one', 'two')
+New - '{} {}'.format('one', 'two')
+Output: one two
+
+Old - %d %d' % (1, 2)
+New - '{} {}'.format(1, 2)
+Output: 1 2
+
+New - '{1} {0}'.format('one', 'two')
+Output: two one
+
+PADD AND ALIGN
+Old - %10s' % ('test',)
+New - '{:>10}'.format('test')
+Output:       test # align right
+
+Old - '%-10s' % ('test',)
+New - '{:10}'.format('test')
+Output: test # align left
+
+New - '{:_<10}'.format('test')
+Output: test______
+
+New - '{:^10}'.format('test')
+Output:    test
+
+New - '{:^6}'.format('zip')
+Output:  zip
+
+TRUNCATING
+Old - '%.5s' % ('xylophone',)
+New - '{:.5}'.format('xylophone')
+Output: xylop
+
+TRUNCATING AND PADDING
+Old - '%-10.5s' % ('xylophone',)
+New - '{:10.5}'.format('xylophone')
+Output:  xylop
+
+NUMBERS
+Old - '%d' % (42,)
+New - '{:d}'.format(42)
+Output: 42
+
+Old - '%f' % (3.141592653589793,)
+New - '{:f}'.format(3.141592653589793)
+Output: 3.141593
+
+PADDING NUMBERS
+Old - '%4d' % (42,)
+New - '{:4d}'.format(42)
+Output:   4
+
+Old - '%06.2f' % (3.141592653589793,)
+New - '{:06.2f}'.format(3.141592653589793)
+Output: 003.14
+
+Old - '%04d' % (42,)
+New - '{:04d}'.format(42)
+Output: 0042
+
+SIGNED NUMBERS
+Old - '%+d' % (42,)
+New - '{:+d}'.format(42)
+Output: +42
+
+Old - '% d' % ((- 23),)
+New - '{: d}'.format((- 23))
+Output: -23
+Old - '% d' % (42,)
+New - '{: d}'.format(42)
+Output: 42
+
+New - '{:=5d}'.format((- 23))
+Output: -  23
+New - '{:=+5d}'.format(23)
+Output: +  23
+
+NAMED PLACEHOLDERS
+data = {'first': 'Hodor', 'last': 'Hodor!'}
+Old - '%(first)s %(last)s' % data
+New - '{first} {last}'.format(**data)
+Output: Hodor Hodor!
+
+New - '{first} {last}'.format(first='Hodor', last='Hodor!')
+Output: Hodor Hodor!
+
+GETITEM AND GETTATR
+person = {'first': 'Jean-Luc', 'last': 'Picard'}
+New - '{p[first]} {p[last]}'.format(p=person)
+Output: Jean-Luc Picard
+
+data = [4, 8, 15, 16, 23, 42]
+New - '{d[4]} {d[5]}'.format(d=data)
+Output: 23 42
+
+class Plant(object):
+    type = 'tree'
+New - '{p.type}'.format(p=Plant())
+Output: tree
+
+class Plant(object):
+    type = 'tree'
+    kinds = [{'name': 'oak'}, {'name': 'maple'}]
+New - '{p.type}: {p.kinds[0][name]}'.format(p=Plant())
+Output: tree: oak
+
+DATE TIME
+from datetime import datetime
+New - '{:%Y-%m-%d %H:%M:%S}'.format(datetime(2001, 2, 3, 4, 5))
+Output: 2001-02-03 04:05
+
+PARAMETRIZED FORMATS
+New-  '{:{align}{width}}'.format('test', align='^', width='10')
+Output:    test
+
+Old - '%.*s = %.*f' % (3, 'Gibberish', 3, 2.7182)
+New - '{:.{prec}} = {:.{prec}f}'.format('Gibberish', 2.7182, prec=3)
+Output: Gib = 2.718
+
+Old - '%*.*f' % (5, 2, 2.7182)
+New - '{:{width}.{prec}f}'.format(2.7182, width=5, prec=2)
+Output:  2.72
+
+New - '{:{prec}} = {:{prec}}'.format('Gibberish', 2.7182, prec='.3')
+Output: Gib = 2.72
+
+from datetime import datetime
+dt = datetime(2001, 2, 3, 4, 5)
+New - '{:{dfmt} {tfmt}}'.format(dt, dfmt='%Y-%m-%d', tfmt='%H:%M')
+Output: 2001-02-03 04:05
+
+New - '{:{}{}{}.{}}'.format(2.7182818284, '>', '+', 10, 3)
+Output:      +2.72
+
+New - '{:{}{sign}{}.{}}'.format(2.7182818284, '>', 10, 3, sign='+')
+Output:      +2.72
+
+class HAL9000(object):
+    def __format__(self, format):
+        if (format == 'open-the-pod-bay-doors'):
+            return "I'm afraid I can't do that."
+        return 'HAL 9000'
+New - '{:open-the-pod-bay-doors}'.format(HAL9000())
+Output: I'm afraid I can't do that.
