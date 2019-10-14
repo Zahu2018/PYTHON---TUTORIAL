@@ -1,3 +1,8 @@
+"""{'Author': 'Florian Zah', 'Date': '14.10.2019',
+'Description': 'format string text','Last Modification': None,
+'Tags': ['format', 'str', 'string'],
+'Title': 'FORMAT'}}"""
+
 FORMAT
 
 '{}'.format(value)
