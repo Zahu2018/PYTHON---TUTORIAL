@@ -1,7 +1,7 @@
 """{'Author': 'Florian Zah', 'Date': '01.10.2019',
 'Description': 'Exit or close a python program','Last Modification': '',
 'Tags': ['exit', 'quit', 'sys.exit', 'os.exit', 'close', 'inchide'],
-'Title': 'EXIT'}}"""
+'Title': 'EXIT'}"""
 
 1. quit(code=None)
     a) in consola: iese din python fara eroare
