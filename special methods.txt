@@ -1,0 +1,312 @@
+"""{'Author': 'Florian Zah', 'Date': '21.10.2019',
+'Description': 'special methods in python','Last Modification': None,
+'Tags': ['special', 'methods', 'dunder', 'special methods', 'class'],
+'Title': 'SPECIAL METHODS CLASS'}"""
+
+SPECIAL CLASS METHODS
+(called to implement behaviour when a function is called; like: len())
+work behind the scene
+
++=============================================================================+
+| Magic Method                        | When it gets invoked (example)        |
+|Explanation:                                                                 |
++=============================================================================+
+| __new__(cls [,...])                 | instance = MyClass(arg1, arg2)        |
+|Explanation: __new__ is called on instance creation                          |
++-----------------------------------------------------------------------------+
+| __init__(self [,...])               | instance = MyClass(arg1, arg2)        |
+|Explanation: __init__ is called on instance creation                         |
++-----------------------------------------------------------------------------+
+| __pos__(self)                       | +self                                 |
+|Explanation: Unary plus                                                      |
++-----------------------------------------------------------------------------+
+| __neg__(self)                       | -self                                 |
+|Explanation: Unary minus                                                     |
++-----------------------------------------------------------------------------+
+| __invert__(self)                    | ~self                                 |
+|Explanation: Bitwise inversion                                               |
++-----------------------------------------------------------------------------+
+| __invert__(self)                    | ~self                                 |
+|Explanation: Bitwise inversion                                               |
++-----------------------------------------------------------------------------+
+| __index__(self)                     | x[self]                               |
+|Explanation: Conversion when object is used as index                         |
++-----------------------------------------------------------------------------+
+| __getattr__(self, name)             | self.name # name doesn't exist        |
+|Explanation: Accessing nonexistent attribute                                 |
++-----------------------------------------------------------------------------+
+| __setattr__(self, name, val)        | self.name = val                       |
+|Explanation: Assigning to an attribute                                       |
++-----------------------------------------------------------------------------+
+| __delattr__(self, name)             | del self.name                         |
+|Explanation: Deleting an attribute                                           |
++-----------------------------------------------------------------------------+
+| __getattribute__(self, name)        | self.name                             |
+|Explanation: Accessing any attribute                                         |
++-----------------------------------------------------------------------------+
+| __getitem__(self, key)              | self[key]                             |
+|Explanation: Accessing an item using an index                                |
++-----------------------------------------------------------------------------+
+| __setitem__(self, key, val)         | self[key] = val                       |
+|Explanation: Assigning to an item using an index                             |
++-----------------------------------------------------------------------------+
+| __delitem__(self, key)              | del self[key]                         |
+|Explanation: Deleting an item using an index                                 |
++-----------------------------------------------------------------------------+
+| __iter__(self)                      | for x in self                         |
+|Explanation: Iteration                                                       |
++-----------------------------------------------------------------------------+
+| __contains__(self, value)           | value in self, value not in self      |
+|Explanation: Membership tests using in                                       |
++-----------------------------------------------------------------------------+
+| __call__(self [,...])               | self(args)                            |
+|Explanation: "Calling" an instance                                           |
++-----------------------------------------------------------------------------+
+| __enter__(self) with                |self as x:                             |
+|Explanation: with statement context managers                                 |
++-----------------------------------------------------------------------------+
+| __exit__(self, exc, val, trace)     | with self as x:                       |
+|Explanation: with statement context managers                                 |
++-----------------------------------------------------------------------------+
+| __getstate__(self)                  | pickle.dump(pkl_file, self)           |
+|Explanation: Pickling                                                        |
++-----------------------------------------------------------------------------+
+| __setstate__(self)                  | data = pickle.load(pkl_file)          |
+|Explanation: Pickling                                                        |
++=============================================================================+
+
+0. 
+__dict__   = dictionary containing class namespace
+__doc__    = documentation if present; else None
+__name__   = class name
+__module__ = name of module where class is defined; __main__
+__bases__  = tuple containing base class
+
+
+1. CONSTRUCTOR, INITIALIZATOR, DESTRUCTION
+__new__(cls, [...)    = First method called when creatin object
+__init__(self, [, args, ...)  = Initialization, receive param.
+__del__(self)         = Destructor (sockets or file objects)
+
+2. OPERATORS - COMPARISON
+__eq__(self, other)   = equality operator, ==
+__ne__(self, other)   = inequality operator, !=
+__lt__(self, other)   = less-than operator, <; x=5; x.__lt__(7) => True
+__gt__(self, other)   = reater-than operator, >
+__le__(self, other)   = less-than-or-equal-to operator, <=
+__ge__(self, other)   = greater-than-or-equal-to operator, >=
+
+3. OPERATORS - NUMERIC
+__pos__(self)         = unary positive (e.g. +some_object)
+__neg__(self)         = negation (e.g. -some_object)
+__abs__(self)         = abs() function
+__invert__(self)      = inversion using the ~ operator
+__round__(self, n)    = round() function
+__floor__(self)       = math.floor(), rounding down to the nearest integer
+__ceil__(self)        = math.ceil(), rounding up to the nearest integer
+__trunc__(self)       = math.trunc(), truncating to an integral
+
+4. OPERATORS - ARITHMETIC   [self + other]
+__add__(self, other)      = addition +
+__sub__(self, other)      = subtraction -
+__mul__(self, other)      = multiplication *
+__floordiv__(self, other) = floor dividion //
+__div__(self, other)      = division /
+__truediv__(self, other)  = when from __future__ import division
+__mod__(self, other)      = modulo %
+__divmod__(self, other)   = long division; divmod()
+__pow__                   = power **
+
+5. OPERATORS - BITWISE      [self + other]
+__lshift__(self, other)   = left bitwise shift <<
+__rshift__(self, other)   = right bitwise shift >>
+__and__(self, other)      = and &
+__or__(self, other)       = or |
+__xor__(self, other)      = xor ^
+
+6. OPERATORS - REFLECTED ARITHMETIC [other + self]
+__radd__(self, other)     = reflected additon +
+__rsub__(self, other)     = reflected subtraction -
+__rmul__(self, other)     = reflected multiplication *
+__rfloordiv__(self, other)= reflected integer division //
+__rdiv__(self, other)     = reflected division /
+__rtruediv__(self, other) = reflected true division (from __future__ import division)
+__rmod__(self, other)     = reflected modulo %
+__rdivmod__(self, other)  = reflected long division; divmod() 
+__rpow__                  = reflected exponents **
+
+7. OPERATORS - REFLECTED BITWISE
+__rlshift__(self, other)  = reflected left bitwise shift <<
+__rrshift__(self, other)  = reflected right bitwise shift >>
+__rand__(self, other)     = reflected bitwise and &
+__ror__(self, other)      = reflected bitwise or |
+__rxor__(self, other)     = reflected bitwise xor ^
+
+8. OPERATORS - AUGUMENTED ASIGNMENT [x += 1]
+__iadd__(self, other)     = assignment addition +=
+__isub__(self, other)     = assignment subtraction -+
+__imul__(self, other)     = assignment multiplication *=
+__ifloordiv__(self, other)= assignment integer division //=
+__idiv__(self, other)     = assignment division /=
+__itruediv__(self, other) = assignment true division (from future import division)
+__imod__(self, other)     = assignment modulo %=
+__ipow__                  = assignment exponent **=
+
+9. OPERATOR - AUGUMENTED BITWISE
+__ilshift__(self, other)  = assignment left bitwise shift <<=
+__irshift__(self, other)  = assignment right bitwise shift >>=
+__iand__(self, other)     = assignment and &=
+__ior__(self, other)      = assignment or |=
+__ixor__(self, other)     = assignment xor ^=
+
+10. CONVERSION (UNARY)
+__neg__(self)             = -
+__pos__(self)             = +
+__invert__(self)          = ~
+__abs__(self)             = abs()
+__int__(self)             = int()
+__float__(self)           = float()
+__complex__(self)         = complex()
+__oct__(self)             = oct()
+__hex__(self)             = hex()
+__index__(self)           = 
+__trunc__(self)           = math.trunc(); truncate float to integer
+
+11. REPRESENTING CLASS
+__str__(self)             = str(); human-readable
+__repr__(self)            = repr(); machine-readable
+__format__(self, formstr) = new-style str format; "{}".format(var) 
+__hash__(self)            = hash(); must implement __eq__ also
+__dir__(self)             = dir(); list atributes 
+__sizeof__(self)          = sys.getsizeof(); return size of obj. in bytes
+
+12. ATTRIBUTE CONTROLING [encapsulation]
+__getattr__(self, name)        = for accessing atribute that doesn't exist
+__setattr__(self, name, value) = encapsulation solution
+__delattr__(self, name)        = delete atribute
+__getattribute__(self, name)   = for new style classes
+
+13. CONTAINERS
+__len__(self)               = len()
+__getitem__(self, key)      = access item, self[key]; TypeError, KeyError
+__setitem__(self, key, val) = assigned item, self[nkey]=val; TypeError, KeyError
+__delitem__(self, key)      = del self[key]; TypeError, KeyError
+__iter__(self)              = iter()
+__reversed__(self)          = reversed(); for list, tuple
+__contains__(self, item)    = membership 
+__missing__(self, key)      = key of dict missing; subclasses of dic
+
+14. REFLECTION
+__instancecheck__(self, instance) = isinstance(instance, class)
+__subclasscheck__(self, subclass) = issubclass(subclass, class)
+
+15. CALLABLE OBJECT
+__call__(self, [args...]) = allows instance of class to be called as a function; x() <=> x.__call__()
+
+16. CONTEXT MANAGER
+__enter__(self) = when: with open('foo.txt') as bar: 
+__exit__(self, exception_type, exception_value, traceback) = when: finished; handle exception, perform cleanup, ... after action
+
+17. DESCRIPTOR
+__get__(self, instance, owner) = 
+Define behavior for when the descriptor's value is retrieved. instance is the instance of the owner object. owner is the owner class itself.
+__set__(self, instance, value)
+Define behavior for when the descriptor's value is changed. instance is the instance of the owner class and value is the value to set the descriptor to.
+__delete__(self, instance)
+Define behavior for when the descriptor's value is deleted. instance is the instance of the owner object.
+
+18. COPY
+__copy__(self)
+Defines behavior for copy.copy() for instances of your class. copy.copy() returns a shallow copy of your object -- this means that, while the instance itself is a new instance, all of its data is referenced -- i.e., the object itself is copied, but its data is still referenced (and hence changes to data in a shallow copy may cause changes in the original).
+__deepcopy__(self, memodict={})
+Defines behavior for copy.deepcopy() for instances of your class. copy.deepcopy() returns a deep copy of your object -- the object and its data are both copied. memodict is a cache of previously copied objects -- this optimizes copying and prevents infinite recursion when copying recursive data structures. When you want to deep copy an individual attribute, call copy.deepcopy() on that attribute with memodict as the first argument.
+
+19. OTHER SPECIAL METHODS
+__mro__ = Method Resolution Order (se foloseste la clase derivate) ne ajuta sa vizualizam inheritance/derivatii.
+
+
+----------------------------------------------
+
+I. BINARY OPERATORS
+Operator    Method
++           object.__add__(self, other)
+-           object.__sub__(self, other)
+*           object.__mul__(self, other)
+//          object.__floordiv__(self, other)
+/           object.__truediv__(self, other)
+%           object.__mod__(self, other)
+**          object.__pow__(self, other[, modulo])
+<<          object.__lshift__(self, other)
+>>          object.__rshift__(self, other)
+&           object.__and__(self, other)
+^           object.__xor__(self, other)
+|           object.__or__(self, other)
+
+II. EXTENDED ASSIGNMENTS
+Operator    Method
++=          object.__iadd__(self, other)
+-=          object.__isub__(self, other)
+*=          object.__imul__(self, other)
+/=          object.__idiv__(self, other)
+//=         object.__ifloordiv__(self, other)
+%=          object.__imod__(self, other)
+**=         object.__ipow__(self, other[, modulo])
+<<=         object.__ilshift__(self, other)
+>>=         object.__irshift__(self, other)
+&=          object.__iand__(self, other)
+^=          object.__ixor__(self, other)
+|=          object.__ior__(self, other)
+
+III. UNARY OPERATORS
+Operator    Method
+-           object.__neg__(self)
++           object.__pos__(self)
+abs()       object.__abs__(self)
+~           object.__invert__(self)
+complex()   object.__complex__(self)
+int()       object.__int__(self)
+long()      object.__long__(self)
+float()     object.__float__(self)
+oct()       object.__oct__(self)
+hex()       object.__hex__(self
+
+IV. COMPARISON OPERATORS
+Operator    Method
+<           object.__lt__(self, other)
+<=          object.__le__(self, other)
+==          object.__eq__(self, other)
+!=          object.__ne__(self, other)
+>=          object.__ge__(self, other)
+>           object.__gt__(self, other)
+
+
+---------------------------------------
+EXAMPLES
+    A).  
+    class MyClass:
+        pass
+    x = MyClass()  # obiectul
+    
+    MyClass.__dict__ => {'module': '__main__', '__dict__': <...}
+    MyClass.__doc__ => nothing
+    MyClass.__doc__ = """Documentation for class."""  # Give a docstring for class
+    MyClass.__doc__ => "Documentation for class."
+    MyClass.__name__ => MyClass
+    MyClass.__name__ = "NUME"  # give a name to class
+    MyClass.__name__ => NUME
+    MyClass.__bases__ => <class 'object'>
+    -------------------------------------
+
+    B). 
+    __str__(self)
+        return("name: {}\n age: {}".format(self.name, self.age) # printeaza obiectul
+    __del__(self) # sterge obiectul
+        print("Memory allocation deleted")
+    --------------------------------------
+
+    C). 
+
+    ClasaDerivata.__mro__ sau ClasaDerivata.mro()
+
+
+
