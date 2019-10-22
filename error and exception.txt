@@ -1,7 +1,7 @@
 """{'Author': 'Florian Zah', 'Date': '14.10.2019',
 'Description': 'Error and exception','Last Modification': None,
 'Tags': ['error', 'exception', 'try', 'except'],
-'Title': 'ERRORS AND EXCEPTION'}}"""
+'Title': 'ERRORS AND EXCEPTION'}"""
 
 ERRORS AND EXCEPTION
 ====================
