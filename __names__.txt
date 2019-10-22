@@ -1,7 +1,7 @@
 """{'Author': 'Florian Zah', 'Date': '25.09.2019',
 'Description': '__ names in python __','Last Modification': None,
 'Tags': ['__names__', 'names', '__main__', 'main'],
-'Title': '__NAMES__'}}"""
+'Title': '__NAMES__'}"""
 
 __names__
 =========
