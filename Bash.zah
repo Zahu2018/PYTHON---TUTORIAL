@@ -1,7 +1,7 @@
 """{'Author': 'Florian Zah', 'Date': '02.10.2019',
 'Description': 'Bash help file','Last Modification': '',
 'Tags': ['bash', 'cmd', 'help', 'tutorial'],
-'Title': 'BASH CMD'}}"""
+'Title': 'BASH CMD'}"""
 
 OPERATORS
 >> appends to a file or creates the file if it doesn't exist.
