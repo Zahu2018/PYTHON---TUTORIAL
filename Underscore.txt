@@ -18,7 +18,7 @@ UNDERSCORES IN PYTHON
         * If in a module will not be imported (unless explicit import)
     2.2 * self._money = 10
         * from module import *  # will not import _var/methods...
-        
+            
 3. Single trailing underscore: variable_
     3.1 Avoid naming conflicts with Python keywords
     3.2 * dir_  # dir is a keyword in Pyhton
@@ -34,7 +34,9 @@ UNDERSCORES IN PYTHON
                 self.__baz = 'overridden'
             >>> dir(t2)  # __baz renamed _ExtendedTest__baz
             ['_ExtendedTest__baz', '_Test__baz', '__class__', ...]
-    4.3 a class attribute (private use in class) 
+    4.3 a class attribute (private use in class) (see bellow)
+        __secretVar = 0  # data hidding (placed in a class)
+        obiect.__clasName__attrName  # for accessing if necessary
 
 5. Double leading and trailing underscore: __variable__
     5.1 Dunder or special / "magic methods" like: __init__, __call__
