@@ -1,7 +1,7 @@
 """{'Author': 'Florian Zah', 'Date': '02.10.2019',
 'Description': 'Status of program development','Last Modification': '',
 'Tags': ['status', 'program', 'software', 'development'],
-'Title': 'STATUS'}}"""
+'Title': 'STATUS'}"""
 
 Status          Definition
 ======          ==========
