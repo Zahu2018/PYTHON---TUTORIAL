@@ -1,0 +1,887 @@
+CLASSES
+
+
+dir(list) #atributele sau metodele unui obiect. Ex: dir(list), dir(lista_mea)
+type() #tipul unei clase, obiest. Ex: type(var_a)
+obiect.__class__ => din ce clasa face parte
+
+ 1. TERMINOLOGY (class, instance, method, atribute, ...)
+ 2. INHERITANCE (multiple inheritance)
+ 3. PROTOTYPE
+ 4. SELF
+ 5. INIT
+ 6. VARIABLE
+ 7. SPECIA METHODS
+ 8. OVERLOADING OPERATOR
+ 9. OBJECT
+10. STATIC METHODS
+11. ACCESS MEMBER
+12. EXAMPLES
+
+
+1. TERMINOLOGY
+
+1.1 Class
+    − A user-defined prototype for an object that defines a set of attributes that characterize any object of the class. The attributes are data members (class variables and instance variables) and methods, accessed via dot notation.
+    - A better way to organize code
+    - A template/sketch/blueprint for creating objects
+1.2 Class variable
+     − A variable that is shared by all instances of a class. Class variables are defined within a class but outside any of the class's methods. Class variables are not used as frequently as instance variables are.
+1.3 Data member
+     − A class variable or instance variable that holds data associated with a class and its objects.
+1.4 Function overloading
+     − The assignment of more than one behavior to a particular function. The operation performed varies by the types of objects or arguments involved.
+1.5 Instance variable
+     − A variable that is defined inside a method and belongs only to the current instance of a class.
+1.6 Inheritance
+     − The transfer of the characteristics of a class to other classes that are derived from it.
+1.7 Instance
+     − An individual object of a certain class. An object obj that belongs to a class Circle, for example, is an instance of the class Circle.
+1.8 Instantiation
+     − The creation of an instance of a class.
+1.9 Method
+     − A special kind of function that is defined in a class definition.
+1.10 Object
+     − A unique instance of a data structure that is defined by its class. An object comprises both data members (class variables and instance variables) and methods.
+1.11 Operator overloading
+     − The assignment of more than one function to a particular operator.
+1.12 Encapsulation
+     - ...
+1.13 Abstraction
+     - ...
+1.14 Polymorphism
+     - ...
+1.15 Namespaces
+     - ...
+
+
+2. INHERITANCE
+
+    - issubclass(ChildClass, ParentClass): return True = to check if a class is subclass
+    - issubclass(sub, sup) # return True if the given subclass sub is indeed a subclass of the superclass sup
+    - isinstance(obj, Class) # return True if obj is an instance of class Class or is an instance of a subclasses of Class
+    
+2.1 Simple Inheritance
+    class BaseClass:  # parent class
+        pass
+    class DerivedClass(BaseClass):  # child class
+        pass
+    +-------------------------------------------------------------+
+    |   BaseClass # (parent class)                                |
+    |   ==========================                                |   
+    |       Feature 1                                             |
+    |       Feature 2                                             |
+    |           |                                                 |
+    |           +---->  DerivedClass(BaseClass)  # (child class)  |
+    |                   ========================================  |
+    |                       Feature 1 (inherited)                 |
+    |                       Feature 2 (inherited and overridden)  |
+    |                       Feature 3 (own feature)               |
+    +-------------------------------------------------------------+
+2.2 Multiple Inheritance
+    class BaseClass1:  # parent class
+        pass
+    class BaseClass2:  # parent class
+        pass
+    class MultiDerivedClass(Base1, Base2):  # child class
+        pass
+    +------------------------------------------------------------------------+
+    |   BaseClass1 # (parent class)          BaseClass2 # (parent class)     |
+    |   ===========================          ===========================     |
+    |       Feature 1                                   Feature 2            |
+    |           |                                            |               |
+    |           |                                            |               |
+    |           +--> DerivedClass(BaseClass1, BaseClass2) <--+               |
+    |                # (child class)                                         |
+    |                ====================================                    |
+    |                   Feature 1 (from BaseClass1)                          |
+    |                   Feature 2 (from BaseClass2)                          |
+    |                   Feature 3 (own feature)                              |
+    +------------------------------------------------------------------------+
+2.3 Multilevel Inheritance
+    class Base:  # parent class
+        pass
+    class Derived1(Base):  # parent class / child class
+        pass
+    class Derived2(Derived1):  # child class
+        pass
+    +--------------------------------------------------------------------+
+    |  BaseClass # (parent class)                                        |
+    |  ==========================                                        |
+    |      Feature 1                                                     |
+    |      Feature 2                                                     |
+    |          |                                                         |
+    |          |                                                         |
+    |          +----> DerivedClass1(BaseClass)  # parent/child class     |
+    |                 ==============================================     |
+    |                  Feature 2 (inherited)                             |
+    |                  Feature 3 (own feature)                           |
+    |                      |                                             |
+    |                      |                                             |
+    |                      +----> DerivedClass2(DerivedClass1) # child   |
+    |                             ====================================   |
+    |                        Feature 2 (inherited from BaseClass)        |
+    |                        Feature 3 (inherited from DerivedClass1)    |
+    |                        Feature 4 (own feature)                     |
+    +--------------------------------------------------------------------+
+2.4 Multiderived Inheritance
+    class X:
+        pass
+    class Y:
+        pass
+    class Z:
+        pass
+    class A(X, Y):
+        pass
+    class B(Y, Z):
+        pass
+    class MultiDerived(B, A, Z):
+        pass
+    +------------------------------------------------------------+
+    |  class X                 class Y                 class Z   |
+    | =========               =========               =========  |               
+    | Feature 1               Feature 2               Feature 3  |       
+    |    |                       | |                     |       |
+    |    |                       | |                     |       |
+    |    +------> class A <------+ +------> class B <----+       |
+    |            =========                 ==========            |
+    |            Feature 1                  Feature 2            |
+    |            Feature 2                  Feature 3            |
+    |               |                          |                 |
+    |               |                          |                 |
+    |               +--> class MultiDerived <--+                 |
+    |                    ==================                      |
+    |                         Feature 1                          |
+    |                         Feature 2                          |
+    |                         Feature 3                          |
+    |                         Feature 4                          |
+    +------------------------------------------------------------+
+
+3. PROTOTYPE
+
+class ClassName(param, etc):
+    " Documentation string __doc__ ..."
+    var= 1  # variable
+    def __init__(self, ...):
+        pass
+    def funct():  # function/method
+        pass
+
+
+4. SELF
+
+4.0 Self is a convention not a python name. Can be replaced with anything.
+4.1 Class methods must have an extra first parameter in method definition. We do not give a value for this parameter when we call the method, Python provides it
+4.2 If we have a method which takes no arguments, then we still have to have one argument – the self.
+4.3 This is similar to this pointer in C++ and this reference in Java.
+(When we call a method of this object as myobject.method(arg1, arg2), this is automatically converted by Python into MyClass.method(myobject, arg1, arg2) – this is all the special self is about.)
+
+5. INIT
+
+The __init__ method is similar to constructors in C++ and Java. It is run as soon as an object of a class is instantiated. The method is useful to do any initialization you want to do with your object. When you want to send parameter to class, parameter are captured by __init__.
+
+6. VARIABLE
+
+6.1 Var declared after class keep value. Ex:
+    class MyClass:
+        var = 'unu'
+        def __init__(self, v)
+    x = MyClass()
+    x.var(50)  # => 'unu'
+6.2 Private var. Ex: __varPrivate
+    class MyClass:
+        __varPrivate = 70
+    x = MyClass()
+    x.__varPrivate  # => AttributeError: ...
+    x._MyClass__varPrivate  # to access a private var
+
+7. SPECIAL METHODS (most used)(see "Special Methods.txt")
+
+__new__
+__init__    : take var, param,  initialize, construct
+__str__     : for printing (human readable)(if not defined => like __repr__) 
+__repr__    : for printing (default) => <__main__.My class instance at 0x7fa079da6710>
+__doc__     : for display documentation of function or class
+__name__    : class that produced obj. (Ex: obj.__name__)
+__del__     : distroy object or class; destructor (del(Class))
+__dict__    : dict containing class's namespace
+__module__  : module name where class is defined
+
+
+8. OVERLOADING OPERATOR (changing a function inside a class)
+
+Operator Overloading Special Functions in Python
+Operator                Expression          Internally     
+Addition                p1 + p2             p1.__add__(p2)     
+Subtraction             p1 - p2             p1.__sub__(p2)     
+Multiplication          p1 * p2             p1.__mul__(p2)     
+Power                   p1 ** p2            p1.__pow__(p2)     
+Division                p1 / p2             p1.__truediv__(p2)     
+Floor Division          p1 // p2            p1.__floordiv__(p2)    
+Remainder (modulo)      p1 % p2             p1.__mod__(p2)     
+Bitwise Left Shift      p1 << p2            p1.__lshift__(p2)      
+Bitwise Right Shift     p1 >> p2            p1.__rshift__(p2)      
+Bitwise AND             p1 & p2             p1.__and__(p2)     
+Bitwise OR              p1 | p2             p1.__or__(p2)      
+Bitwise XOR             p1 ^ p2             p1.__xor__(p2)     
+Bitwise NOT             ~p1                 p1.__invert__()  
+
+Comparision Operator Overloading in Python
+Operator                Expression          Internally     
+Less than               p1 < p2             p1.__lt__(p2)      
+Less than or equal to   p1 <= p2            p1.__le__(p2)      
+Equal to                p1 == p2            p1.__eq__(p2)      
+Not equal to            p1 != p2            p1.__ne__(p2)      
+Greater than            p1 > p2             p1.__gt__(p2)      
+Greater or equal to     p1 >= p2            p1.__ge__(p2)    
+
+
+9. OBJECT
+
+- atribute of a class can be created on the fly (din mers, dupa definirea clasei: clasa.attribut = 5)
+- stergerea unui atribut del clasa.attribut 
+- stergerea unui obiect del obiect (POVESTE: Cand se sterge din memorie un obiect numele lui este sters din namespace, legatura dintre numele obiectului si obiect este distrusa, obiectul in sine persista in memorie. Daca obiectului persistent in memorie nu ii este atribuit nici un alt nume atunci el este distrus mai tarziu in mod automat. Aceasta se numeste garbage collection = distrugerea automata a obiectelor care nu au nici o referinta)
+
+- to call method use object.method(argument)
+- to call a method from another method use self.method(argument)
+- to call a method from another method use Class.method(argument)
+- to access var defined in object self.variable 
+- to access var defined in different object object.var but this is frowned upon
+
+
+10. STATIC METHODS
+
+Class method and Static method
+Variables
+ - toate sunt statice
+
+class Example:
+    staticVariable = 5 # Access through class
+
+print Example.staticVariable # prints 5
+
+# Access through an instance
+instance = Example()
+print instance.staticVariable # still 5
+
+# Change within an instance
+instance.staticVariable = 6
+print instance.staticVariable # 6
+print Example.staticVariable # 5
+
+# Change through
+class Example.staticVariable = 7
+print instance.staticVariable # still 6
+print Example.staticVariable # now 7
+
+Methods
+@staticmethod
+Method decorated with this decorator shares with the class only the namespace. Note that, no arguments are mandatory in the method definition. Static method can access classes static variables 
+
+
+class Example:
+    name = "Example"
+
+    @staticmethod
+    def static():
+        print "%s static() called" % Example.name
+
+class Offspring1(Example):
+    name = "Offspring1"
+
+class Offspring2(Example):
+    name = "Offspring2"
+
+    @staticmethod
+    def static():
+        print "%s static() called" % Offspring2.name
+
+Example.static() # prints Example
+Offspring1.static() # prints Example
+Offspring2.static() # prints Offspring2
+@classmethod
+The difference between class method and static method in Python is, that class method recieves one mandatory argument – a class name it was called from. 
+
+class Example:
+    name = "Example"
+
+    @classmethod
+    def static(cls):
+        print "%s static() called" % cls.name
+
+class Offspring1(Example):
+    name = "Offspring1"
+    pass
+
+class Offspring2(Example):
+    name = "Offspring2"
+
+    @classmethod
+    def static(cls):
+        print "%s static() called" % cls.name
+
+Example.static()    # prints Example
+Offspring1.static() # prints Offspring1
+Offspring2.static() # prints Offspring2 
+
+Which one should you use? The first option allows you only to access the static variables in the same class. With the second approach you’ll be able to modify class variables of the subclasses without the neccessity of redefining the method when using inheritance. I prefer the first variant, because I personaly think it’s a cleaner solution, but the second variant might come useful in certain situations as well 
+
+11. ACCESS MEMBER
+
+PUBLIC
+- In Python everything is public, but: ...
+
+class Cup:
+    def __init__(self):
+        self.color = None
+        self.content = None
+
+    def fill(self, beverage):
+        self.content = beverage
+
+    def empty(self):
+        self.content = None
+# accesare
+redCup = Cup()
+redCup.color = "red"
+redCup.content = "tea"
+redCup.empty()
+redCup.fill("coffee")
+
+PROTECTED
+ - C++ accesibil din clasa sau subclasa
+ - in Python prefixed cu un underscore _
+ - nu ar trebui accesata sau schimbata din afara clasei
+
+class Cup:
+    def __init__(self):
+        self.color = None
+        self._content = None # protected variable
+
+    def fill(self, beverage):
+        self._content = beverage # protected variable
+
+    def empty(self):
+        self._content = None # protected variable
+# accesare
+cup = Cup()
+cup._content = "tea" # e posibil 
+
+PRIVATE
+ - nu ar trebui accesata din afara clasei
+ - in Python prefixed with 2 underscore __ and sufixed with at most 1 underscore _ 
+
+class Cup:
+    def __init__(self, color):
+        self._color = color    # protected variable
+        self.__content = None  # private variable
+
+    def fill(self, beverage):
+        self.__content = beverage
+
+    def empty(self):
+        self.__content = None
+# accesare
+redCup = Cup("red")
+redCup._Cup__content = "tea" # e posibil
+
+========================
+METACLASA
+class Metaclass(type):
+    def __new__(mcs, name, bases, dict_):
+        print("__NEW__")
+        cls = super(Metaclass, mcs).__new__(mcs, name, bases, dict_)
+        return cls
+
+    def __init__(cls, name, bases, dict_):
+        print("__INIT__")
+        super(Metaclass, cls).__init__(name, bases, dict_)
+
+    def __call__(cls, *args):
+        print("__CALL__")
+        obj = super(Metaclass, cls).__call__(*args)
+        return obj
+
+class MyObj(object):
+    __metaclass__ = Metaclass
+
+MyObj()
+
+=======================
+
+- atribute of a class can be created on the fly (din mers, dupa definirea clasei: clasa.attribut = 5)
+- stergerea unui atribut del clasa.attribut
+- stergerea unui obiect del obiect (POVESTE: Cand se sterge din memorie un obiect numele lui este sters din namespace, legatura dintre numele obiectului si obiect este distrusa, obiectul in sine persista in memorie. Daca obiectui <<persistent in memorie>> nu ii este atribuit nici un alt nume atunci el este distrus mai tarziu in mod automat. Aceasta se numeste garbage collection = distrugerea automata a obiectelor care nu au nici o referinta)
+
+- to call method use object.method(argument)
+- to call a method from another method use self.method(argument)
+- to access var defined in object self.variable
+- to access var defined in different object object.var but this is frowned upon
+
+
+EXAMPLES
+
+A). Inheritance (multiple)
+Example:
+# Python example to show working of multiple  
+# inheritance 
+class Base1(object): 
+    def __init__(self): 
+        self.str1 = "Geek1"
+        print "Base1"
+  
+class Base2(object): 
+    def __init__(self): 
+        self.str2 = "Geek2"        
+        print "Base2"
+  
+class Derived(Base1, Base2): 
+    def __init__(self): 
+          
+        # Calling constructors of Base1 
+        # and Base2 classes 
+        Base1.__init__(self) 
+        Base2.__init__(self) 
+        print "Derived"
+          
+    def printStrs(self): 
+        print(self.str1, self.str2) 
+
+    ob = Derived() 
+    ob.printStrs() 
+--------------------------
+# 1. Access parent member in subclass - using parent class name
+# Python example to show that base 
+# class members can be accessed in 
+# derived class using base class name 
+class Base(object): 
+  
+    # Constructor 
+    def __init__(self, x): 
+        self.x = x     
+  
+class Derived(Base): 
+  
+    # Constructor 
+    def __init__(self, x, y): 
+        Base.x = x  
+        self.y = y 
+  
+    def printXY(self): 
+       
+       # print(self.x, self.y) will also work 
+       print(Base.x, self.y) 
+  
+  
+# Driver Code 
+d = Derived(10, 20) 
+d.printXY()
+-----------------------
+# 2. Access parent member in subclass - using supper()
+# Python example to show that base 
+# class members can be accessed in 
+# derived class using super() 
+class Base(object): 
+  
+    # Constructor 
+    def __init__(self, x): 
+        self.x = x     
+  
+class Derived(Base): 
+  
+    # Constructor 
+    def __init__(self, x, y): 
+          
+        ''' In Python 3.x, "super().__init__(name)" 
+            also works''' 
+        super(Derived, self).__init__(x) 
+        self.y = y 
+  
+    def printXY(self): 
+  
+       # Note that Base.x won't work here 
+       # because super() is used in constructor 
+       print(self.x, self.y) 
+  
+  
+# Driver Code 
+d = Derived(10, 20) 
+d.printXY() 
+-------------
+Exercise:
+Predict the output of following Python programs
+
+filter_none
+edit
+play_arrow
+
+brightness_4
+   
+class X(object): 
+    def __init__(self, a): 
+        self.num = a 
+    def doubleup(self): 
+        self.num *= 2
+  
+class Y(X): 
+    def __init__(self, a): 
+        X.__init__(self, a) 
+    def tripleup(self): 
+        self.num *= 3
+  
+obj = Y(4) 
+print(obj.num) 
+  
+obj.doubleup() 
+print(obj.num) 
+  
+obj.tripleup() 
+print(obj.num) 
+Output:
+4
+8
+24
+filter_none
+edit
+play_arrow
+
+brightness_4
+# Base or Super class 
+class Person(object): 
+    def __init__(self, name): 
+        self.name = name 
+          
+    def getName(self): 
+        return self.name 
+      
+    def isEmployee(self): 
+        return False
+  
+# Inherited or Subclass (Note Person in bracket) 
+class Employee(Person): 
+    def __init__(self, name, eid): 
+  
+        ''' In Python 3.0+, "super().__init__(name)" 
+            also works''' 
+        super(Employee, self).__init__(name) 
+        self.empID = eid 
+          
+    def isEmployee(self): 
+        return True
+          
+    def getID(self): 
+        return self.empID 
+  
+# Driver code 
+emp = Employee("Geek1", "E101")  
+print(emp.getName(), emp.isEmployee(), emp.getID()) 
+Output:
+('Geek1', True, 'E101')
+--------------------------------------------------
+
+B). Inheritance (multiderived)
+class ClassName(NameOfParentClass): # NameOfParentClass is a super class where from inherit all variables and methods
+    variable definition
+    method / functions definition
+
+Exemplu simple inheritance:
+class Polygon:
+    def __init__(self, no_of_sides):
+        self.n = no_of_sides
+        self.sides = [0 for i in range(no_of_sides)]
+
+    def inputSides(self):
+        self.sides = [float(input("Enter side "+str(i+1)+" : ")) for i in range(self.n)]
+
+    def dispSides(self):
+        for i in range(self.n):
+            print("Side",i+1,"is",self.sides[i])
+
+class Triangle(Polygon):
+    def __init__(self):
+        Polygon.__init__(self, 3)     overriding the initial method __init__
+        super().__init__(3)  # este echivalenta cu randul de mai sus (super()) = built-in function (se foloseste ori prima ori a doua)
+    def findArea(self):
+        a, b, c = self.sides
+        # calculate the semi-perimeter
+        s = (a + b + c) / 2
+        area = (s*(s-a)*(s-b)*(s-c)) ** 0.5
+        print('The area of the triangle is %0.2f' %area)
+
+p = Polygon(5) #trebuie initializat pt ca are no_of_sides
+p.inputSides() #functia nu are decat self deci nu punem nimic
+p.dispSides()  # nu punem nimic
+
+t = Triangle()  # nu punem nimic ca clasa Triangle(Polygon) in __init__ are Polygon.__init__(self, 3); adica Polygon va fi initializat cu 3:  p = Polygon(3)
+
+C). Inheritance (simple class)
+-------------------------------
+1. Simple Class Inheritance - old class style definition
+import math
+class Shape:
+    def __init__(self):
+        self.color = 'red'
+        self.sides = 0
+
+class Square(Shape):
+    def __init__(self, w): 
+        Shape.__init__(self)
+        self.width = w  
+
+sq1 = Square(5)
+
+print("Square latime: ", sq1.width)
+print("Square sides: ", sq1.sides)
+print("Square colors: ", sq1.color)
+
+D). 
+2. Class Overriding methods - old class style definition
+import math
+class Shape:
+    def __init__(self):
+        self.color = 'RED'
+        self.sides = 0
+
+class Square(Shape):
+    def __init__(self, w, c): 
+        Shape.__init__(self)  # initializam si asta in Classa Shape
+        self.width = w
+        self.color = c  # aici rescriem metoda de mai sus 
+
+sq1 = Square(5, "BLUE")    # mai adaugam un parametru care va  fi rescris
+
+print("Square latime: ", sq1.width)
+print("Square sides: ", sq1.sides)
+print("Square colors: ", sq1.color)
+
+3. Add new methods - old class style definition
+import math
+class Shape:
+    def __init__(self):
+        self.color = 'RED'
+        self.sides = 0
+    def area(self): # important aici pt. a sti in toate functiile ca exista si area
+        return 0 
+
+class Square(Shape):
+    def __init__(self, w, c): 
+        Shape.__init__(self)
+        self.width = w
+        self.color = c  
+
+sq1 = Square(5, "BLUE")
+
+print("Square latime: ", sq1.width)
+print("Square sides: ", sq1.sides)
+print("Square colors: ", sq1.color)
+print("Area: ", sq1.area())
+
+4. Add new class Circle and calc area - old class style definition
+import math
+class Shape:
+    def __init__(self):
+        self.color = 'RED'
+        self.sides = 0
+    def area(self): #i mportant aici pt. a sti in toate
+                    # functiile ca exista si area
+        return 0 
+
+class Square(Shape):
+    def __init__(self, w, c): 
+        Shape.__init__(self)
+        self.width = w
+        self.color = c  
+
+class Circle(Shape):
+    def __init__(self, r, c):
+        Shape.__init__(self)
+        self.radius = r
+        self.color = c
+    def area(self):      # rescriem metoda
+        return math.pi * (self.radius ** 2)     
+
+sq1 = Square(5, "BLUE") # creem obiectul patrat
+cerc = Circle(1, "CYAN") # creem obiectul cerc si dupa aceea il accesam
+
+print("Square latime: ", sq1.width)
+print("Square sides: ", sq1.sides)
+print("Square colors: ", sq1.color)
+print("Area: ", cerc.area())
+
+5. Multiple inheritance - old class style definition
+import math
+class Shape:
+    def __init__(self):
+        self.color = 'RED'
+        self.sides = 0
+    def area(self): #i mportant aici pt. a sti in toate
+         return 0
+
+class Patrate(Shape):
+    def __init__(self, w, l, w, c):
+        self.sides = 4
+        self.width = w
+        self.lenght = l
+        self.color = c
+
+class Square(Patrate):
+    def __init__(self, w, c): 
+        Shape.__init__(self)
+        self.width = w
+        self.color = c  
+
+class Circle(Shape):
+    def __init__(self, r, c):
+        Shape.__init__(self)
+        self.radius = r
+        self.color = c
+    def area(self):
+        return math.pi * (self.radius ** 2)     
+
+sq1 = Square(5, "BLUE") # creem obiectul
+cerc = Circle(1, "CYAN")
+
+print("Square latime: ", sq1.width)
+print("Square sides: ", sq1.sides)
+print("Square colors: ", sq1.color)
+print("Area: ", cerc.area())
+
+6. Obiect and superfunction - new style class definition
+ 
+import math
+class Shape(object):
+    def __init__(self):
+        self.color = 'RED'
+        self.sides = 0
+    def area(self): #i mportant aici pt. a sti in toate
+         return 0
+
+class Patrate(Shape):
+    def __init__(self, w, l, w, c):
+        self.sides = 4
+        self.width = w
+        self.lenght = l
+        self.color = c
+
+class Square(Patrate):
+    def __init__(self, w, c): 
+        super(Square, self).__init__(w, l, c)
+
+class Circle(Shape):
+    def __init__(self, r, c):
+        super(Circle, self).__init__()
+        self.radius = r
+        self.color = c
+    def area(self):
+        return math.pi * (self.radius ** 2)     
+
+sq1 = Square(5, "BLUE") # creem obiectul
+cerc = Circle(1, "CYAN")
+
+print("Square latime: ", sq1.width)
+print("Square sides: ", sq1.sides)
+print("Square colors: ", sq1.color)
+print("Area: ", cerc.area())
+-----------------------------------
+        ---------------------
+Template
+class ClassName:
+   'A comment that describe what class do'
+   var_first = 0 # var shared among all the instancess in this class; outside of class can be accessed ClassName.var_unu
+
+   def __init__(self, name, var_1): # constructor(initialization) method; is called when you create a new instance of this class; self  - apartine acestei clase, poate fi accesat in orice functie; the arguments from instance(when create object), (like in function situation) come here
+      self.name = name
+      self.var_1 = var_1
+      ClassName.var_first += 1
+   
+   def displayCount(self):
+     print "Total Employee %d" % ClassName.var_first 
+
+   def displayEmployee(self):
+      print "Name : ", self.name,  ", Salary: ", self.var_1
+        ---------------------
+7.1 __init__    : take var, initialize, construct
+
+7.2 __str__     : for printing
+    if __str__not defined then default used: <__main__.My class instance at 0x7fa079da6710>
+
+7.3 __repr__    : for printing
+    if __repr__ defined then default used: <__main__.My class instance at 0x7fa079da6710>
+Exemple:
+ClassName.__doc__ =>  'A comment that describe what class do'
+ClassName.__name__ => ClassName
+ClassName.__module__ => __main__
+ClassName.__bases__ =>(<class 'object'>,)
+ClassName.__dict__ => 
+{
+'displayCount': <function Employee.displayCount at 0x0160D2B8>, 
+'__module__': '__main__',
+'__doc__': 'Common base class for all employees', 
+'var_first': 2, '__init__': <function Employee.__init__ at 0x0124F810>,
+'displayEmployee': <function Employee.displayEmployee at 0x0160D300>,
+'__weakref__': <attribute '__weakref__' of 'Employee' objects>,
+'__dict__': <attribute '__dict__' of 'Employee' objects>
+}
+----------
+
+
+    class Test: 
+    def __init__(self, a, b): 
+        self.a = a 
+        self.b = b 
+  
+    def __repr__(self): 
+        return "Test a:%s b:%s" % (self.a, self.b) 
+  
+    def __str__(self): 
+        return "From str method of Test: a is %s," \ 
+              "b is %s" % (self.a, self.b) 
+  
+    t = Test(1234, 5678) 
+    print(t) # This calls __str__() 
+    print([t]) # This calls __repr__() 
+-----------------------
+OPERATOR OVERLOADING = 
+Ex:
+class Point:
+    def __init__(self, x = 0, y = 0):
+        self.x = x
+        self.y = y
+   def __str__(self):    #asta controleaza cum si ce se printeaza altfer rezulta ceva de genul <__main__.Point object at 0x00000000031F8CC0>
+        return "({0},{1})".format(self.x,self.y)
+   def __add__(self,other):
+        x = self.x + other.x
+        y = self.y + other.y
+        return Point(x,y)
+
+p1 = Point(2,3)
+p2 = Point(-1,2)
+p1 + p2     --> rezulta eroare nu stie ce e + si trebuie definit
+----------------------
+__str__(self)
+    return("name: {}\n age: {}".format(self.name, self.age) # printeaza obiectului
+------------------
+
+
+Overloading Operators
+Suppose you have created a Vector class to represent two-dimensional vectors. What happens when you use the plus operator to add them? Most likely Python will yell at you.
+You could, however, define the __add__ method in your class to perform vector addition and then the plus operator would behave as per expectation −
+Example
+class Vector:
+   def __init__(self, a, b):
+      self.a = a
+      self.b = b
+
+   def __str__(self):
+      return 'Vector (%d, %d)' % (self.a, self.b)
+   
+   def __add__(self,other):
+      return Vector(self.a + other.a, self.b + other.b)
+
+v1 = Vector(2,10)
+v2 = Vector(5,-2)
+print (v1 + v2)
+
+=> Vector(7, 8)
+-----------------
+
