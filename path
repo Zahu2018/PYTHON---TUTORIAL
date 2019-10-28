@@ -1,0 +1,16 @@
+PATH
+
+1. RELATIVE
+    "..data/test.csv"
+    os.listdir()                # directorul curent
+    os.listdir("../")           # un director mai sus
+    os.listdir("../DIANA")      # un director mai sus, si unul jos
+    os.listdir("../../")        # doi directori mai sus
+    os.listdir("PRO1/Alegeri")  # un director mai jos
+
+2. ABSOLUTE
+    Windows: "C:\\Users\\User\\file.ext"
+    Windows: "C:\\Users\\User\\"
+    Linux:   "/temp/home/file.ext"
+
+    os.listdir("C:\\Users\\User\\")
