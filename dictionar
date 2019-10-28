@@ -145,6 +145,18 @@ dict.update({key:value}) #adauga item la dict, sau daca exista face update la
 dict.update(y=2, z=4, key = "John") # key sa fie fara ghilimele
 dict['key'] = valoare #key sa fie cu ghilimele = str(key); pt. iteration
 
+NESTED DICTIONARIES
+ADD ITEM, CHANGE ITEM
+people = {1: {'name': 'John', 'age': '27', 'sex': 'Male'},
+          2: {'name': 'Marie', 'age': '22', 'sex': 'Female'}}
+people[3] = {}
+people[3]['name'] = 'Luna'
+people[3]['age'] = '24'
+people[3]['sex'] = 'Female'
+people[3]['married'] = 'No'
+
+)
+
 EXAMPLES
 Ex_1: CREAZA DICTIONAR DIN FOR LOOP
 di = {}
@@ -163,3 +175,28 @@ Ex_3: ACCESARE SIMPLA DACA ACESTE REZULTATE SUNT INTR-UN FISIER CU NUMELE census
 import census
 census.allData['SJ']['Simleu'] # => {'populatie':1250, 'segmente':10} #allData pentru ca asa este numit dictionarul
 census.allData['SJ']['Uileac']['populatie'] # => 500 # spui de fapt: fisierul census > dictionarul allData > itemul SJ > itemul > Uileac > itemul pop
+
+Ex_4: DICTIONARE COMPLEXE 1
+students = {
+            "Alice": ["ID0001", 26, "A"],
+            "Bob": ["ID0002",27,"B"],
+            "Claire": ["ID0003", 27, "C"],
+            "Dan": ["ID0004", 21, "D"],
+            "Emma":["ID0005", 22, "E"]
+            }
+
+print(students["Claire"][0])
+print(students["Dan"][1:])
+
+Ex_5: DICTIONARE COMPLEXE 2
+#Give each key its own dictionary
+students = {
+            "Alice": {"id": "ID0001", "age":26, "grade": "A"},
+            "Bob": {"id": "ID0002", "age":27, "grade": "B"},
+            "Claire": {"id": "ID0003", "age":17, "grade": "C"},
+            "Dan": {"id": "ID0004", "age":21, "grade": "D"},
+            "Emma": {"id": "ID0005", "age":22, "grade": "E"},
+            }
+
+print(students["Dan"]["age"])
+print(students["Emma"]["id"])
