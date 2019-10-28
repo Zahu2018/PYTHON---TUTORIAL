@@ -1,0 +1,165 @@
+DICTIONARY(#dictionary, #dict, #dictionar) dict = {'key':'value'}
+
+    dict={'key':'value'}  # key: tuple, str, dict; NU: list
+
+    dict.items() => list of tuplet (key, value); Ex: [('k','v'), ('k1','v1')..]
+    dict.keys() => list of keys
+    dict.values() => list of values
+    dict.pop('key' [, default]) => item and delete it if in dict; else (fara default) => KeyError
+    dict.popitem() => arbitrary item and delete it; if dict. empty => KeyError
+    dict.setdefault('key' [, value_default=None]) => val of key if key in dict; else add new key:val=None
+    dict.update([seq]) => None; make update from tuple; overwrite existent key; Ex: dict.update(red=1, blue=2); Ex: dict.update(dict1)
+    dict.clear() => del item form dict
+    dict.copy() => shallow copy of dict; when change dict, shallow dict change also
+    dict.fromkeys(seq [, valoare = deafault=None]) => new dict form seq
+    dict.get(key [, default=None]) => key if in dict; else default; no errors
+    - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    len(dict) => nr of items
+    len(dictview) => nr of items from dictview = (dict.items(), .keys, .values )
+    del dict['key'] => delete an item
+    dict(seq) => new dict from seq; Ex: dict([('unu', 100), ...; Ex: dict(unu=1, doi=2)
+    iter(dict) => iter from keys, values, items; Ex: iter(k.keys())
+    iter(dictview) => iter from keys, values, items
+    dict['key'] => val of key if key in dict; else Error
+    dict['key']=valueNew => update value of key; Ex: dict['total']=50
+    dict['key']=value => add new item if key not exist; else make update of key
+
+    list(dict) => list of keys
+    list(dict.items()) => list of tuplets (key, value); Ex: [('k1,v1'), ...]
+    list(dict.keys()) => list of keys
+    list(dict.values()) => list of values
+    sorted(dict) => sorted list; Ex: sorted(dict.keys()), items, values, ...
+    dict = zip(lista_1, lista_2) => list of tuplets to make dict
+
+    key in dict => True if key in dict; else False
+    key not in dict => True if key not in dict; else False
+    x in dicview => True if x in items, key, val
+    x not in dicview => True if x not in items, keys, values; else False
+    x in dict.values => True if x in val; else False
+
+ERRORS:
+KeyError '...'  = when key not in dict
+KeyError 0      = cand vrei sa accesezi ca intr-o lista (dictionarul nu este in ordine)
+TypeError       = cand o lista este key (NU SE POATE)
+
+1. NU POT FI DOUA KEY CU ACELASI NUME
+2. KEY NU POATE FI LISTA; KEY E IMUTABIL, POATE FI string, number, tuple
+3. SORTED WORK ONLY WHEN TYPES OF KEYS, VALUES ARE THE SAME TYPE (str, int,...)
+4. DICTVIEW IS: dict.items(), dict.keys(), dict.values()
+
+ACCESARE - CITIRE
+- dict['key']  => value
+- dict[dict1][dict2][...] => val of key from dict1, dict 2
+- dict_1[dict_2['key']] => 1. valoarea corespunzatoare lui key din dict_2 devine key pt. dict_1 si afiseaza value; E foarte bun pentru mapare: rom_judete{'salaj':sj, 'bihor':bh, ...}, sj = {'simleu':100, 'zalau'"200, ... }, etc
+- from dictionar.py import dict1
+  dict1['key']  #importam dictionarul dict1 din fila dictionar.py si ...
+- for item in dict:
+    print(dict[item])
+- dict[key]  (if not exist => KeyError)
+- dict.get(key[, default]) (if not exist default, or None => No Error - silent mode)
+- if key in dict
+
+ADAUGARE
+- dict['key'] = value #adaugam la dict(ionar) o noua key / value
+- dict.setdefault(key [, value]) # daca key nu este in dict se adauga o noua pereche key: value in dict
+
+COPIERE
+- dict_new = dict_old.copy() # face o copie a dict_old dar cu un alt nume (dict_new)
+
+CREARE
+- dict = {}
+- dict = dict()
+- dict = zip(lista_1, lista_2) # rezulta o lista cu tupleti din care se face dict (primul cu primul, al doilea ...) Ex: list(zip(lista_1, lista_2)) /sau/ dict(list(zip(lista_1, lista_2))) - ZIP  este un ITERATOR care se epuizeaza dupa ce e folosit - nu este o lista
+- dict([('key1', 10), ('key2', 20), ('key3', 30)]) # rezulta dict = {'key1': 10, 'key2':20, ... }
+- dict(key1 = 10, key2 = 20, key3 = 30)  # rezulta {'key1': 10, 'key2':20, ... }
+- {x: X**2 for x in (2, 4, 6)}  # rezulta {2:4, 4: 16, ... }
+
+( COUNTING )
+- dictionar = {'alfa':1, 'beta':2} # creezi un dictionar din alt dictionar
+dictionar_count = {}
+for element in dictionar:
+    dictionar_count[element] = count.get(element, 0) + 1
+print (count)
+
+DELETE
+- del dict['key']  # sterge itemul din dict
+- dict.clear()  # goleste dict de itemi
+- del dict()  # sterge dictionarul dar va rezulta o eroare
+
+INCREMENT VALUES
+for key, value in d_old.items():
+    value = value*2
+    d_new.setdefault(key, value)
+
+
+INVERSARE DICTIONAR
+d0 = {}
+d1 = {1 : 'unu', 2 : 'doi', 3 : 'trei'}
+for key, value in d1.items():
+    d0.setdefault(value, key)
+print(d0)
+
+
+LOOPING - ITERATOR
+ITERATORII SE EPUIZEAZA DUPA CE SUNT FOLOSITI !!!
+for key, value in dict.items():
+    print(key, value)
+
+READ DICT FROM FILE
+import dict_fm  # e dict_fm.py
+print(dict_fm.dicti)  # dicti = {'fd':'dd', ...} = dict din fila dict_fm.py
+------------------------
+import csv
+csvfile = csv.reader(open('aero.csv'))
+var = dict(csvfile)
+aero.csv
+    "ddd","ew"
+    "fdsa","dsa"
+---------------------------
+f = open('somefile.csv')
+reader = csv.DictReader(f, (airport, iatacode))
+for row in reader:
+   print row
+
+airport   | iata_code
+_______________
+aberden   | abd
+
+SORTARE ALFABETICA
+for item in sorted(dict, key = len):
+    print(item, dict[item])
+----------------------------------------
+for key,value in sorted(dic.items()):
+    print(key, value)
+----------------------------------------
+from collections import OrderedDict
+OrderedDict(dict) => OrderedDict([(6, 6), (1, 1)])
+
+UPDATE VALUE AND DICTIONARY
+- UPDATE A DICTIONARY WITH A NEW VALUE
+dict['key'] = value  # ('value', cu ghilimele daca e string) adauga un nou element la dictionar
+- UPDATE A DICTIONARY WITH ITEMS FROM OTHER DICTIONARY
+dict_1.update(dict_2)  # adauga itemii din dict_2 in dict_1
+dict.update({key:value}) #adauga item la dict, sau daca exista face update la
+- UPDATE // ADD A VALUE IN A DICTIONARY (CHANGE VALUE OF A KEY IN A DICT - allready exist)
+dict.update(y=2, z=4, key = "John") # key sa fie fara ghilimele
+dict['key'] = valoare #key sa fie cu ghilimele = str(key); pt. iteration
+
+EXAMPLES
+Ex_1: CREAZA DICTIONAR DIN FOR LOOP
+di = {}
+for nr, file in enumerate(listdir()):
+    a = open(file, "r")  # deschide fila
+    last_line = a.readlines()[-1]
+    di[file] = last_line
+print(di)
+
+Ex_2: DICTIONARE
+dict = {'SJ':{'Simleu':{'populatie':1250, 'segmente':10},
+                 {'Uileac':{'populatie':500, 'segmente':2}},
+          {'BH':{'Oradea':{'populatie':152652, 'segmente':52}}}
+
+Ex_3: ACCESARE SIMPLA DACA ACESTE REZULTATE SUNT INTR-UN FISIER CU NUMELE census.py
+import census
+census.allData['SJ']['Simleu'] # => {'populatie':1250, 'segmente':10} #allData pentru ca asa este numit dictionarul
+census.allData['SJ']['Uileac']['populatie'] # => 500 # spui de fapt: fisierul census > dictionarul allData > itemul SJ > itemul > Uileac > itemul pop
