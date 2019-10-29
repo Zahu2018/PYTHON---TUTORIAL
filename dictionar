@@ -143,7 +143,12 @@ dict_1.update(dict_2)  # adauga itemii din dict_2 in dict_1
 dict.update({key:value}) #adauga item la dict, sau daca exista face update la
 - UPDATE // ADD A VALUE IN A DICTIONARY (CHANGE VALUE OF A KEY IN A DICT - allready exist)
 dict.update(y=2, z=4, key = "John") # key sa fie fara ghilimele
-dict['key'] = valoare #key sa fie cu ghilimele = str(key); pt. iteration
+dict['key'] = valoare # key sa fie cu ghilimele = str(key); pt. iteration
+- UPDATE NESTED DICTIONARY // ADD A VALUE IN A DICTIONARY 
+Dict = {'Dict1': {'name':'John', 'age':'45'}}
+Dict['Dict1']['name'] = 'Bob'  # update/change 
+Dict['Dict1']['age'] = 21
+Dict['Dict2'] = {'name': 'Bob', 'age': 21}  # echivalent la cele 2 randuri de mai sus
 
 NESTED DICTIONARIES
 ADD ITEM, CHANGE ITEM
