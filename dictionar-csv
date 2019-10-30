@@ -1,0 +1,195 @@
+https://github.com/ksoo86/python-bible-tutorial
+
+1. SCRIE NESTED DICTIONAR IN CSV
+dictionar = {('A', 'link'):
+                {('Nume', 'link_nume'):
+                    {'galerie1': 'link_galerie1',
+                     'galerie2': 'link_galerie2',
+                     'galerie3': 'link_galerie3'}}}
+import csv
+with open('rezultat.csv', 'w', newline='') as file:
+    csv_writer = csv.writer(file, delimiter=',')
+    for k, v in dictionar.items():          # litere
+        for k1, v1 in v.items():            # nume
+            for k2, v2 in v1.items():       # galerii
+                csv_writer.writerow([k[0], k[1], k1[0], k1[1], k2, v2])
+
+2. CITESTE CSV IN NESTED DICTIONAR
+dictionar = {('A', 'link'):  # cum va arata dictionarul
+                {('Nume', 'link_nume'):
+                    {'galerie1': 'link_galerie1',
+                     'galerie2': 'link_galerie2',
+                     'galerie3': 'link_galerie3'}}}
+"""
+csv_file =    # cum arata fisierul csv
+A,link,Nume,link_nume,galerie1,link_galerie1
+A,link,Nume,link_nume,galerie2,link_galerie2
+B,link,Nume,link_nume,galerie1,link_galerie1
+"""
+import csv
+import pprint
+d = {}
+with open('r.csv', 'r') as file:
+    csv_reader = csv.reader(file)
+    for nr, row in enumerate(csv_reader):
+
+        l = row[0]  # key letter       tuple key 0
+        ll = row[1]  # key link letter  tuple key 0
+        let = (l, ll)
+        n = row[2]  # key name         tuple key 1
+        nl = row[3]  # key link name    tuple key 1
+        num = (n, nl)
+        g = row[4]  # key galerie 1    tuple gal 1
+        gl = row[5]  # value galerie 1  val gal 1
+        gal = (g, gl)
+
+        d.setdefault(let, {})
+        d[let].setdefault(num, {})
+        d[let][num].setdefault(g, gl)
+
+    pp = pprint.PrettyPrinter(depth=3)
+    pp.pprint(d)
+
+3. CITESTE LISTE IN NESTED DICTIONAR
+csv_reader = [
+['A','link','Nume','link_nume','galerie1','link_galerie1'],
+['A','link','Nume','link_nume','galerie2','link_galerie2'],
+['A','link','Nume','link_nume','galerie3','link_galerie3'],
+['A','link','Nume1','link_nume1','galerie1','link_galerie1'],
+['B','link','Nume','link_nume','galerie1','link_galerie1']]
+
+d = {}
+import pprint
+for nr, row in enumerate(csv_reader):
+    l = row[0]  # key letter       tuple key 0
+    ll = row[1]  # key link letter  tuple key 0
+    let = (l, ll)
+    n = row[2]  # key name         tuple key 1
+    nl = row[3]  # key link name    tuple key 1
+    num = (n, nl)
+
+    g = row[4]  # key galerie 1    tuple gal 1
+    gl = row[5]  # value galerie 1  val gal 1
+    gal = (g, gl)
+
+    d.setdefault(let, {})
+    d[let].setdefault(num, {})
+    d[let][num].setdefault(g, gl)
+
+pp = pprint.PrettyPrinter(depth=3)
+pp.pprint(d)
+
+4. CITESTE CSV INTR-O LISTA DE LISTE
+import csv
+lista=[]
+with open('rezultat.csv', 'r') as file:
+    csv_reader = csv.reader(file)
+    for line in csv_reader:
+        lista.append(line)
+print(lista)
+
+dictionar = {
+    "Angelica": {
+        "Blues Traveler": 3.5,
+        "Broken Bells": 2.0,
+        "Norah Jones": 4.5,
+        "Phoenix": 5.0,
+        "Slightly Stoopid": 1.5,
+        "The Strokes": 2.5,
+        "Vampire Weekend": 2.0
+    },
+    "Bill":{
+        "Blues Traveler": 2.0,
+        "Broken Bells": 3.5,
+        "Deadmau5": 4.0,
+        "Phoenix": 2.0,
+        "Slightly Stoopid": 3.5,
+        "Vampire Weekend": 3.0
+    },
+    "Chan": {
+        "Blues Traveler": 5.0,
+        "Broken Bells": 1.0,
+        "Deadmau5": 1.0,
+        "Norah Jones": 3.0,
+        "Phoenix": 5,
+        "Slightly Stoopid": 1.0
+    }}
+
+
+Ex_1: WRITE WITH PANDAS
+import pandas as pd
+df = pd.DataFrame(dictionar)
+df.to_csv('sample.csv')
+=> ,Angelica,Bill,Chan
+Blues Traveler,3.5,2.0,5.0
+Broken Bells,2.0,3.5,1.0
+Deadmau5,,4.0,1.0
+Norah Jones,4.5,,3.0
+Phoenix,5.0,2.0,5.0
+Slightly Stoopid,1.5,3.5,1.0
+The Strokes,2.5,,
+Vampire Weekend,2.0,3.0,
+
+Ex_2: WRITE WITH CSV
+import csv
+with open('output.csv', 'w', newline='') as csv_file:
+    csvwriter = csv.writer(csv_file, delimiter='\t')
+    for session in dictionar:
+        for item in dictionar[session]:
+            csvwriter.writerow([session, item, dictionar[session][item]])
+=> ...
+Angelica    The Strokes 2.5
+
+Angelica    Vampire Weekend   2.0
+
+Bill  Blues Traveler    2.0
+
+Bill  Broken Bells      3.5
+...
+
+Ex_3: WRITE WITH CSV - OK
+import csv
+with open('output.csv', 'w', newline='') as csv_file:
+    csvwriter = csv.writer(csv_file, delimiter='\t')
+    for session, ratings in dictionar.items():  # sorted(dictionar...)
+        for rating, value in ratings.items():
+            csvwriter.writerow(["{},{},{}".format(session, rating, value)])
+            # csvwriter.writerow([session, rating, value])  # optional
+=> ...
+Angelica,The Strokes,2.5
+
+Angelica,Vampire Weekend,2.0
+
+Bill,Blues Traveler,2.0
+
+Bill,Broken Bells,3.5
+
+...
+
+Ex_4: WRITE WITH CSV
+import csv
+a = ["Album/Track"] + list(dictionar.keys())  # header line
+x = list(set([y for z in dictionar.values() for y in z.keys()]))  # unique key
+rows = [a]+[[q]+[dictionar[p].get(q, '-') for p in a[1:]] for q in x]  # rows
+with open('my.csv', 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    for row in rows:
+        writer.writerow(row)
+=>  Album/Track,Angelica,Bill,Chan
+
+    Vampire Weekend,2.0,3.0,-
+
+    Slightly Stoopid,1.5,3.5,1.0
+
+Ex_5: WRITE WITH PANDAS
+import pandas as pd
+df = pd.DataFrame(dictionar)
+df = df.rename(columns={'Angelica': 'Good',
+'Bill': 'Medium'})
+df.to_csv('student.csv', index=False)
+=> Good,Medium,Chan
+3.5,2.0,5.0
+2.0,3.5,1.0
+,4.0,1.0
+...
+
