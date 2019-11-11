@@ -1,0 +1,614 @@
+SQLITE3
+=======
+
+Am ramas la:
+    SQLite - Syntax
+
+INSTALLATION
+============
+    1. Create folder C:\SQLITE
+    2. Place here extracted:
+        sqlite3.def, sqlite3.dll and sqlite3.exe
+    3. MyComputer > Properties > Advanced system settings >
+        Advanced > Enviroment Variable > Users Variable > PATH: C:\SQLITE
+    4. sqlite3
+
+DEFINITIONS
+===========
+Database - a collection of related records, organized into tables
+Table - a set of data elements (values) organized by records (horizontal rows) and fields (vertical columns)
+Record (or row) - a single, structured data item in a table
+Field (or column) - a set of data values of a particular simple type, one for each row of the table
+
+MAIN COMMANDS OF SQL
+====================
+1. CREATE
+    Create table, view of table, obj, ...
+2. SELECT
+    Retrieve certains rocords from table(s)
+3. INSERT
+    Create a record
+4. UPDATE
+    Modify a record
+5. DELETE
+    Delete a record
+6. DROP
+    Delete a table, view of table, obj, ...
+7. ALTER
+    Modify obj (table, ...)
+
+CONSOLE SQLite3 COMMANDS
+=========================
+.backup ?DB? FILE => Backup DB (default "main") to FILE
+.bail ON|OFF => Stop after hitting an error. Default OFF
+.databases => List names and files of attached databases
+.dump ?TABLE? => Dump the database in an SQL text format. If TABLE specified, only dump tables matching LIKE pattern TABLE
+.echo ON|OFF => Turn command echo on or off
+.exit => Exit SQLite prompt
+.explain ON|OFF => Turn output mode suitable for EXPLAIN on or off. With no args, it turns EXPLAIN on
+.header(s) ON|OFF => Turn display of headers on or off
+.help => display list of commands can be used
+.import FILE TABLE => Import data from FILE into TABLE
+.indices ?TABLE? => Show names of all indices. If TABLE specified, only show indices for tables matching LIKE pattern TABLE
+.load FILE ?ENTRY? => Load an extension library
+.log FILE|off => Turn logging on or off. FILE can be stderr/stdout
+.mode MODE => Set output mode where MODE is one of:
+                csv     − Comma-separated values
+                column  − Left-aligned columns.
+                html    − HTML <table> code
+                insert  − SQL insert statements for TABLE
+                line    − One value per line
+                list    − Values delimited by .separator string
+                tabs    − Tab-separated values
+                tcl     − TCL list elements
+.nullvalue STRING => Print STRING in place of NULL values
+
+16
+.output FILENAME
+
+Send output to FILENAME
+
+17
+.output stdout
+
+Send output to the screen
+
+18
+.print STRING...
+
+Print literal STRING
+
+19
+.prompt MAIN CONTINUE
+
+Replace the standard prompts
+
+20
+.quit
+
+Exit SQLite prompt
+
+21
+.read FILENAME
+
+Execute SQL in FILENAME
+
+22
+.schema ?TABLE?
+
+Show the CREATE statements. If TABLE specified, only show tables matching LIKE pattern TABLE
+
+23
+.separator STRING
+
+Change separator used by output mode and .import
+
+24
+.show
+
+Show the current values for various settings
+
+25
+.stats ON|OFF
+
+Turn stats on or off
+
+26
+.tables ?PATTERN?
+
+List names of tables matching a LIKE pattern
+
+27
+.timeout MS
+
+Try opening locked tables for MS milliseconds
+
+28
+.width NUM NUM
+
+Set column widths for "column" mode
+
+29
+.timer ON|OFF
+
+Turn the CPU timer measurement on or off
+
+CONSOLE SQLite3 COMMANDS
+========================
+select * from a_table;
+------------------------
+
+KEYWORDS IN SQLITE3 (most frequently)
+=====================================
+aggregate functions
+ALTER TABLE
+ANALYZE
+ATTACH DATABASE
+BEGIN TRANSACTION
+comment
+COMMIT TRANSACTION
+core functions
+CREATE INDEX
+CREATE TABLE
+CREATE TRIGGER
+CREATE VIEW
+CREATE VIRTUAL TABLE
+date and time functions
+DELETE
+DETACH DATABASE
+DROP INDEX
+DROP TABLE
+DROP TRIGGER
+DROP VIEW
+END TRANSACTION
+EXPLAIN
+expression
+INDEXED BY
+INSERT
+keywords
+ON CONFLICT clause
+PRAGMA
+REINDEX
+RELEASE SAVEPOINT
+REPLACE
+ROLLBACK TRANSACTION
+SAVEPOINT
+SELECT
+UPDATE
+VACUUM
+WITH clause
+
+DATATYPES
+=========
+---------------------------+--------------------+---------------------+
+Example Typenames From The |                    |    Rule Used To     |
+CREATE TABLE Statement or  | Resulting Affinity |  Determine Affinity |
+CAST Expression            |                    |                     |
+---------------------------+--------------------+---------------------+
+INT                             INTEGER                      1
+INTEGER
+TINYINT
+SMALLINT
+MEDIUMINT
+BIGINT
+UNSIGNED BIG INT
+INT2
+INT8
+-----------------------------------------------------------------------+
+CHARACTER(20)                   TEXT                         2
+VARCHAR(255)
+VARYING CHARACTER(255)
+NCHAR(55)
+NATIVE CHARACTER(70)
+NVARCHAR(100)
+TEXT
+CLOB
+------------------------------------------------------------------------+
+BLOB                            BLOB                         3
+no datatype specified
+------------------------------------------------------------------------+
+REAL                            REAL                         4
+DOUBLE
+DOUBLE PRECISION
+FLOAT
+------------------------------------------------------------------------+
+NUMERIC                         NUMERIC                      5
+DECIMAL(10,5)
+BOOLEAN
+DATE
+DATETIME
+------------------------------------------------------------------------+
+
+AFFINITY
+========
+Affinity    Description
+TEXT        This column stores all data using storage classes NULL, TEXT or BLOB.
+NUMERIC     This column may contain values using all five storage classes.
+INTEGER     Behaves the same as a column with NUMERIC affinity with an exception in a CAST expression.
+REAL        Behaves like a column with NUMERIC affinity except that it forces integer values into floating point representation
+NONE        A column with affinity NONE does not prefer one storage class over another and no attempt is made to coerce data from one storage class into another.
+
+1. CREATE A DATABASE
+2. CREATE A TABLE
+3. DROP TABLE
+
+
+01. CREATE A DATABASE
+    +--------------------------------------------
+    |sqlite3 a_database_name.db (in consola)
+    +--------------------------------------------
+    .databases => arata noua db creata
+
+02. CREATE A TABLE
+    +--------------------------------------------
+    |CREATE TABLE table_name
+    |(
+    |column_name1 data_type PRIMARY KEY(can have one or more columns),
+    |column_name2 data_type,
+    |column_name3 data_type(50),
+    |....
+    |column_nameN data_type,
+    |); => creaza un nou tabel
+    +--------------------------------------------
+    .tables
+    .schema
+    Ex:
+    sqlite> CREATE TABLE STUDENTS(
+    ID INT PRIMARY KEY     NOT NULL,
+    NAME           TEXT    NOT NULL,
+    SURNAME        TEXT    NOT NULL,
+    AGE            INT     NOT NULL,
+    ADDRESS        CHAR(50)
+    );
+
+03. DROP TABLE
+    +--------------------------------------------
+    |DROP TABLE table_name; => sterge un tabel cu toate: triggers, indexes, constraints and permissions
+    +--------------------------------------------
+    .tables
+
+04. SELECT
+    +--------------------------------------------
+    |SELECT column_name1,column_name1 FROM table_name; => fetch data from database
+    |SELECT * from table_name;
+    +--------------------------------------------
+    .tables = > pt a afla numele tabelelor in db
+    .schema table_name => pt a afla numele coloanelor; schema of tables
+    .header on => pt a avea numele coloanelor
+    .mode column => mode for output table
+    .mode line => different display type
+    .mode csv =>
+    .show => display current setting for various param
+    .databases => display databases path
+    .quit => quit SQLite3
+    .dump => dump database in SQL format
+    .separator row "\n"
+    .nullvalue null
+    .output data.csv
+
+05. DISTINCT
+    +--------------------------------------------
+    |SELECT DISTINCT column_name1, column_name2 => optional keywords; indicate if answer contain duplicate (on the same column: John, John)
+    |FROM table_name;
+    +--------------------------------------------
+
+06. WHERE [used in SELECT, DELETE, UPDATE]
+    +--------------------------------------------
+    |SELECT column_name1, column_name2, column_nameN FROM table_name WHERE [condition]
+    |SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;
+    +--------------------------------------------
+        Conditions:
+        =       equals
+        >       greater than
+        <       Less than
+        >=      greater than or equal to
+        <=      less than or equal to
+        <>      not equal to
+        BETWEEN Between an inclusive range
+        LIKE    Search for a pattern
+        IN      If you know the exact value you want to return for at least one of the columns
+    Ex:
+    SELECT * FROM table_STUDENTS WHERE column_NAME='Mark';
+    SELECT * FROM table_STUDENTS WHERE column_AGE>=20;
+    SELECT * FROM table_STUDENTS WHERE column_AGE BETWEEN 20 AND 22;
+    SELECT * FROM table_STUDENTS WHERE column_NAME LIKE 'Jo%';
+    SELECT * FROM table_STUDENTS WHERE column_AGE IN ( 18, 21 );
+
+07. AND & OR |
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+
+
+08. ORDERED BY
+    +--------------------------------------------
+    |SELECT column_1, column_2, column_n FROM table_name WHERE [condition_1] [ORDER BY column_1, column_2, .. column_n] [ASC];
+    |SELECT column_1, column_2, column_n FROM table_name WHERE [condition_1] [ORDER BY column_1, column_2, .. column_n] [DESC];
+    +--------------------------------------------
+        ASC  = acendent
+        DESC = descendent
+    Ex:
+    SELECT * FROM table_STUDENTS ORDER BY column_AGE ASC;
+    SELECT * FROM table_STUDENTS ORDER BY column_AGE DESC;
+
+09. INSERT INTO
+    +--------------------------------------------
+    |INSERT INTO table_name VALUES (value1,value2,value3,...);
+    |INSERT INTO table_name (column_name1,column_name2,column_name3,...) VALUES (value1,value2,value3,...);
+    +--------------------------------------------
+    Ex:
+    INSERT INTO STUDENTS (ID, NAME, SURNAME, AGE, ADDRESS) VALUES (8, 'Jerry', 'Bann', 23, 'Bonn');
+    INSERT INTO STUDENTS (ID, NAME, SURNAME) VALUES (9, 'Meg', 'Manner');
+
+10. UPDATE
+    +--------------------------------------------
+    |UPDATE table_name SET column_1 = value_1, column_2 = value_2...., column_N = value_N WHERE [condition];
+    +--------------------------------------------
+    Ex:
+    UPDATE STUDENTS SET ADDRESS = 'Velbert' WHERE ID = 3;
+    UPDATE STUDENTS SET ADDRESS = 'Velbert', SALARY = 20; -- modify entire column
+
+11. DELETE
+    +--------------------------------------------
+    |DELETE FROM table_name WHERE [condition];
+    +--------------------------------------------
+    Ex:
+    DELETE FROM STUDENTS WHERE ID = 7;
+    DELETE FROM STUDENTS;  -- delete all rows
+
+12. INJECTION
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+13. SELECT TOP
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+14. LIKE
+    +--------------------------------------------
+    |SELECT * FROM table_name WHERE column LIKE pattern;
+    |SELECT column_1, column_2, ... FROM table_name WHERE column LIKE pattern;
+    +--------------------------------------------
+        % represent zero, one, multiple char
+        _ represent a single char
+    Ex:
+    WHERE AGE LIKE '2%'  -- 26, 245, ...
+    WHERE AGE LIKE '%6'  -- 36, 456, ...
+    WHERE INVENTORY LIKE '%123%'  -- 12345, 64123, ...
+    WHERE AGE LIKE '_3%'  -- 23, 132, 43, ...
+    WHERE INVENTORY LIKE '3_%_%' -- start with 3, has 3 char in lenght; 325, 3696,
+    WHERE INVENTORY LIKE '4%7'  -- start with 4; end with 7; 4557, 427
+    SELECT * FROM STUDENTS WHERE AGE LIKE '2%';
+
+15. WILDCARD
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+16. IN
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+17. BETWEEN
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+18. ALIASES
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+19. JOINS
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+20. INNER JOIN
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+21. LEFT JOIN
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+22. RIGHT JOIN
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+23. FULL JOIN
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+24. UNION
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+25. SELECT INTO
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+26. INSERT INTO SELECT
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+27. CONSTRAINTS
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+28. NOT NULL
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+29. UNIQUE
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+30. PRIMARY KEY
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+31. FOREIGN KEY
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+32. CHECK
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+33. DEFAULT
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+34. CREATE INDEX
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+35. ALTER
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+36. AUTO INCREMENT
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+37. VIEWS
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+38. DATE AND TIME
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+39. NULL VALUES
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+40. NULL FUNCTION
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+41. DATA TYPES
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+42. DB DATA TYPES
+    +--------------------------------------------
+    |
+    +--------------------------------------------
+
+FUNCTIONS SQLITE
+AVG()
+COUNT()
+FIRST()
+LAST()
+MAX()
+MIN()
+SUM()
+GOUP BY
+HAVING
+UCASE()
+LCASE()
+MID()
+LEN()
+ROUND()
+NOW()
+FORMAT()
+
+
+
+
+
+
+DOTCOMMANDS (FROM sqlite3 site)
+===========
+sqlite> .help
+.archive ...             Manage SQL archives
+.auth ON|OFF             Show authorizer callbacks
+.backup ?DB? FILE        Backup DB (default "main") to FILE
+.bail on|off             Stop after hitting an error.  Default OFF
+.binary on|off           Turn binary output on or off.  Default OFF
+.cd DIRECTORY            Change the working directory to DIRECTORY
+.changes on|off          Show number of rows changed by SQL
+.check GLOB              Fail if output since .testcase does not match
+.clone NEWDB             Clone data into NEWDB from the existing database
+.databases               List names and files of attached databases
+.dbconfig ?op? ?val?     List or change sqlite3_db_config() options
+.dbinfo ?DB?             Show status information about the database
+.dump ?TABLE? ...        Render all database content as SQL
+.echo on|off             Turn command echo on or off
+.eqp on|off|full|...     Enable or disable automatic EXPLAIN QUERY PLAN
+.excel                   Display the output of next command in a spreadsheet
+.exit ?CODE?             Exit this program with return-code CODE
+.expert                  EXPERIMENTAL. Suggest indexes for specified queries
+.fullschema ?--indent?   Show schema and the content of sqlite_stat tables
+.headers on|off          Turn display of headers on or off
+.help ?-all? ?PATTERN?   Show help text for PATTERN
+.import FILE TABLE       Import data from FILE into TABLE
+.imposter INDEX TABLE    Create imposter table TABLE on index INDEX
+.indexes ?TABLE?         Show names of indexes
+.iotrace FILE            Enable I/O diagnostic logging to FILE
+.limit ?LIMIT? ?VAL?     Display or change the value of an SQLITE_LIMIT
+.lint OPTIONS            Report potential schema issues.
+.load FILE ?ENTRY?       Load an extension library
+.log FILE|off            Turn logging on or off.  FILE can be stderr/stdout
+.mode MODE ?TABLE?       Set output mode
+    [ascii column csv html insert line list quote tabs tcl]
+.nullvalue STRING        Use STRING in place of NULL values
+.once (-e|-x|FILE)       Output for the next SQL command only to FILE
+.open ?OPTIONS? ?FILE?   Close existing database and reopen FILE
+.output ?FILE?           Send output to FILE or stdout if FILE is omitted
+.parameter CMD ...       Manage SQL parameter bindings
+.print STRING...         Print literal STRING
+.progress N              Invoke progress handler after every N opcodes
+.prompt MAIN CONTINUE    Replace the standard prompts
+.quit                    Exit this program
+.read FILE               Read input from FILE
+.restore ?DB? FILE       Restore content of DB (default "main") from FILE
+.save FILE               Write in-memory database into FILE
+.scanstats on|off        Turn sqlite3_stmt_scanstatus() metrics on or off
+.schema ?PATTERN?        Show the CREATE statements matching PATTERN
+.selftest ?OPTIONS?      Run tests defined in the SELFTEST table
+.separator COL ?ROW?     Change the column and row separators
+.session ?NAME? CMD ...  Create or control sessions
+.sha3sum ...             Compute a SHA3 hash of database content
+.shell CMD ARGS...       Run CMD ARGS... in a system shell
+.show                    Show the current values for various settings
+.stats ?on|off?          Show stats or turn stats on or off
+.system CMD ARGS...      Run CMD ARGS... in a system shell
+.tables ?TABLE?          List names of tables matching LIKE pattern TABLE
+.testcase NAME           Begin redirecting output to 'testcase-out.txt'
+.timeout MS              Try opening locked tables for MS milliseconds
+.timer on|off            Turn SQL timer on or off
+.trace ?OPTIONS?         Output each SQL statement as it is run
+.vfsinfo ?AUX?           Information about the top-level VFS
+.vfslist                 List all available VFSes
+.vfsname ?AUX?           Print the name of the VFS stack
+.width NUM1 NUM2 ...     Set column widths for "column" mode
+sqlite>
