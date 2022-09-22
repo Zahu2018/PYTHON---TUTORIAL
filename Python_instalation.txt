@@ -1,0 +1,11 @@
+Python Interpreting:
+1.  Lexing
+	human_made -> logical entities (lexical tokens)
+2.  Parsing
+	lexical_token checked for syntax and grammar => AST(abstract syntax tree)
+3.  Compiling
+	AST -> Python bytecode (basic instruction)
+4.  Interpreting	                          
+	bytecodes -> performs specified operation
+    
+Python Instalation:
